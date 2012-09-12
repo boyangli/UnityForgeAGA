@@ -1,0 +1,36 @@
+<Scenario
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Battles>
+	<!-- 1 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Aluatra</string>
+        <string>Oloril</string>
+        <string>Magora</string>
+        <string>Walmorn</string>
+      </FriendlyNames>
+      <HostileNames>
+        <string>Blazer</string>
+        <string>Pouring</string>
+	    	<string>Andre</string>
+		    <string>Freezer</string>
+      </HostileNames>
+    </Battle>
+	<!-- 2 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Aluatra</string>
+        <string>Oloril</string>
+        <string>Magora</string>
+        <string>Walmorn</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Plasma</string>
+		<string>Stapo</string>
+		<string>Ogretooth</string>
+		<string>Skeleton</string>
+      </HostileNames>
+    </Battle>
+  </Battles>
+</Scenario>

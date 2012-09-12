@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<behaviortree name="PlayerBT" repeatuntil="">
+  <sequencer name="Root" repeatuntil="running">
+    <action name="TaskExistsConditional" repeatuntil="" classname="ConditionalTaskExists" />
+    <debug name="EnterDebug" repeatuntil="" debugmessage="New task detected, observing." returnvalue="success" />
+    <action name="PreDialogue" repeatuntil="" classname="SayPreDialogue" />
+    <action name="CheckTaskCompletion" repeatuntil="" classname="CheckTaskCompletion" />
+    <action name="PostDialogue" repeatuntil="" classname="SayPostDialogue" />
+    <debug name="Exit Debug" repeatuntil="" debugmessage="Task completed." returnvalue="success" />
+    <action name="CompleteTask" repeatuntil="" classname="CompleteTask" />
+  </sequencer>
+</behaviortree>

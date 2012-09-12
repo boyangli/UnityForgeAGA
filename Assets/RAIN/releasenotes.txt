@@ -1,0 +1,20 @@
+RAINone v1.1.4.0
+--------------
+
+1.1.4 Patch notes:
+--------------
+-Unity 3.5 compatible
+
+-Improved stability of release, especially on some MacOSX Lion machines
+-Fixed simple mind setup to automatically attach simple mind script
+-Fixed behavior tree setup to automatically attach activation manager script
+-Fixes to behavior tree textures - now embedded
+-Changed MoveLookTarget - no longer a ScriptableObject, so use "new" instead of "CreateInstance"
+-Moved RAIN out of the component menu and back into its own outer menu.  Component menu was causing serious problems
+-Fixed issues with reloading path graphs in PathManager ReInit, InitializeMovement
+-PathManager property now public from Agent
+-Misc. Recast fixes
+-Pathfollowing speed upgrades
+-Fixed bug in parallel branch fail/succeed/tiebreaker
+-Obstacle avoidance fixes/upgrades - visualization now available
+

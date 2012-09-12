@@ -1,0 +1,257 @@
+<Scenario
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Battles>
+	<!-- 1 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+        <string>Blazer</string>
+        <string>Pouring</string>
+		<string>Andre</string>
+		<string>Freezer</string>
+      </HostileNames>
+    </Battle>
+	<!-- 2 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Plasma</string>
+		<string>Stapo</string>
+		<string>Ogretooth</string>
+		<string>Skeleton</string>
+      </HostileNames>
+    </Battle>
+	<!-- 3 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Salamander</string>
+		<string>Toad</string>
+		<string>Andre</string>
+		<string>Freezer</string>
+      </HostileNames>
+    </Battle>
+	<!-- 4 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Giant Spider</string>
+		<string>Gazeti</string>
+		<string>Blazer</string>
+		<string>Pouring</string>
+      </HostileNames>
+    </Battle>
+	<!-- 5 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Sropho</string>
+		<string>Cobalt Mineral</string>	
+		<string>Aliot</string>
+		<string>Wind Ghost</string>
+      </HostileNames>
+    </Battle>
+	<!-- 6 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Cloud Hermit</string>
+		<string>Stapo</string>
+		<string>Aliot</string>
+		<string>Wind Ghost</string>
+      </HostileNames>
+    </Battle>
+	<!-- 7 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Imp</string>
+		<string>Cobalt Mineral</string>
+		<string>Sropho</string>
+		<string>Skeleton</string>
+      </HostileNames>
+    </Battle>	
+	<!-- 8 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Snowier</string>
+		<string>Salamander</string>
+		<string>Giant Spider</string>
+		<string>Plasma</string>
+      </HostileNames>
+    </Battle>	
+	<!-- 9 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>RSX</string>
+		<string>Toad</string>
+		<string>Gazeti</string>
+		<string>Ogretooth</string>
+      </HostileNames>
+    </Battle>	
+	<!-- 10 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Aqua Elemental</string>
+		<string>Ungoliant</string>
+		<string>Stapo</string>
+		<string>Ogretooth</string>
+      </HostileNames>
+    </Battle>	
+	<!-- 11 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Bradium Golem</string>
+		<string>Dark Lord</string>
+		<string>Freezer</string>
+		<string>Plasma</string>
+      </HostileNames>
+    </Battle>	
+	<!-- 12 -->
+	<Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		<string>Alchemist</string>
+		<string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>	
+		<string>Blazer</string>
+		<string>Pouring</string>
+		<string>Andre</string>
+		<string>Skeleton</string>
+      </HostileNames>
+    </Battle>	
+	<!--
+    <Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+		<string>Imp</string>
+		<string>Aqua Elemental</string>
+		<string>Ungoliant</string>
+		<string>Snowier</string>		
+		<string>Cloud Hermit</string>
+		<string>Bradium Golem</string>
+		<string>RSX</string>
+		<string>Dark Lord</string>
+      </HostileNames>
+    </Battle>
+    <Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+		    <string>Alchemist</string>
+		    <string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+        <string>Blazer</string>
+        <string>Pouring</string>
+		    <string>Andre</string>
+		    <string>Freezer</string>
+		    <string>Plasma</string>
+		    <string>Stapo</string>
+		    <string>Ogretooth</string>
+		    <string>Skeleton</string>
+      </HostileNames>
+    </Battle>
+    <Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+    		<string>Salamander</string>
+		    <string>Toad</string>
+		    <string>Giant Spider</string>
+    		<string>Gazeti</string>		
+		    <string>Sropho</string>
+    		<string>Cobalt Mineral</string>
+		    <string>Aliot</string>
+    		<string>Wind Ghost</string>
+      </HostileNames>
+    </Battle>
+    <Battle>
+      <FriendlyNames>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+        <string>Alchemist</string>
+      </FriendlyNames>
+      <HostileNames>
+    		<string>Imp</string>
+		    <string>Aqua Elemental</string>
+    		<string>Ungoliant</string>
+		    <string>Snowier</string>		
+    		<string>Cloud Hermit</string>
+		    <string>Bradium Golem</string>
+    		<string>RSX</string>
+		    <string>Dark Lord</string>
+      </HostileNames>
+    </Battle>
+	-->
+  </Battles>
+</Scenario>
