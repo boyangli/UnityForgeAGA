@@ -163,6 +163,7 @@ public class WorldGUI : MonoBehaviour {
                    (this.inventoryBounds.Contains(mouse) && this.displayInventoryBuffer) ||
                    (this.storyBounds.Contains(mouse) && this.displayStoryBuffer) ||
                    (this.localeBounds.Contains(mouse) && this.displayLocalesBuffer) ||
+                   (this.actionBounds.Contains(mouse) && this.displayActionOptions) ||
                    this.DisplayThanks;
         }
     }
@@ -574,7 +575,7 @@ public class WorldGUI : MonoBehaviour {
 	
 	private void drawActions(int windowID) {
         //Collect locale names.
-        string[] actions = new string[5]{"Talk", "Kill", "Trade", "Blink", "Cancel"};
+        string[] actions = new string[11]{"Talk", "Pick Up Item", "Trade Item", "Give Item", "Take Item", "Fight", "Steal Item", "Loot Item", "Kill With Item", "Revive With Item", "Cancel"};
         
         this.AddSpikes(this.actionBounds.width);
 		this.FancyTop(this.actionBounds.width);

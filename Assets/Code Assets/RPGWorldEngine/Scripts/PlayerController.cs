@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour {
     /// The range at which to stop approaching an entity.
     /// </summary>
     public float EntityApproachRange = 1f;
-
     /// <summary>
     /// The current task that the player is attempting to execute.  Provides
     /// context to what mouse clicks on game objects should mean.
@@ -30,8 +29,43 @@ public class PlayerController : MonoBehaviour {
             this.Acted = false;
         }
     }
-
     private Task m_Context;
+	/// <summary>
+	/// Gets or sets the non-context actor.
+	/// </summary>
+	public CharacterScript NonContextActor {
+        get {
+            return this.nc_actor;
+        }
+        set {
+            this.nc_actor = value;
+        }
+    }
+	private CharacterScript nc_actor;
+	/// <summary>
+	/// Gets or sets the non-context actee.
+	/// </summary>
+	public CharacterScript NonContextActee {
+        get {
+            return this.nc_actee;
+        }
+        set {
+            this.nc_actee = value;
+        }
+    }
+	private CharacterScript nc_actee;
+	/// <summary>
+	/// Gets or sets the non-context item.
+	/// </summary>
+	public ItemScript NonContextItem {
+        get {
+            return this.nc_item;
+        }
+        set {
+            this.nc_item = value;
+        }
+    }
+	private ItemScript nc_item;
     /// <summary>
     /// If true, indicates that the contextual task has been executed.
     /// </summary>
@@ -70,9 +104,7 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     public void Update() {
 		
-		if(Globals.Instance.WorldGUI.selectedAction != -1)						
-			Globals.Instance.WorldGUI.DisplayActionOptions = false;
-        //If last frame's mouse object is a character, mark it as not hovered.
+		//If last frame's mouse object is a character, mark it as not hovered.
         if (this.MouseObject != null) {
             CharacterScript cScript = this.MouseObject.GetComponent<CharacterScript>();
             if (cScript != null) cScript.ExpandedLabelInfo = false;
@@ -89,6 +121,15 @@ public class PlayerController : MonoBehaviour {
 
         //Handle contextual left clicks.
         if (Input.GetMouseButtonDown(0)) this.HandleClick();
+		
+		//If Action Selection GUI is done and selection made.
+		if(Globals.Instance.WorldGUI.selectedAction != -1)
+		{
+			Globals.Instance.WorldGUI.DisplayActionOptions = false;
+			this.ActInContext();
+			NonContextActor = NonContextActee = null;
+			NonContextItem = null;
+		}
 
         //Providing a 'clean' way to stop movement.
         if (this.Pathing) {
@@ -98,13 +139,17 @@ public class PlayerController : MonoBehaviour {
             if (this.approachEntity != null) {
                 float dist2 = Vector3.SqrMagnitude(this.approachEntity.transform.position - this.transform.position);
                 if (dist2 < this.EntityApproachRange * this.EntityApproachRange) {
-                    //Close enough, halt movement and attempt contextual action.
-					if(Globals.Instance.WorldGUI.selectedAction == -1)
-						Globals.Instance.WorldGUI.DisplayActionOptions = true;
-					else Globals.Instance.WorldGUI.DisplayActionOptions = false;
-					
+					//Close enough, halt movement and attempt contextual action.
                     pather.moveTarget.TransformTarget = this.transform;
-                    this.ActInContext();
+					
+                    //If action not selected from Action Selection GUI, set flag to pop up GUI.
+					if(Globals.Instance.WorldGUI.selectedAction == -1 && this.NonContextActor != this. NonContextActee)
+					{
+						Globals.Instance.WorldGUI.DisplayActionOptions = true;
+						this.NonContextActor = this.gameObject.GetComponent<CharacterScript>();
+						this.NonContextActee = this.approachEntity.GetComponent<CharacterScript>();
+						this.NonContextItem = this.approachEntity.GetComponent<ItemScript>();
+					}
 
                     this.approachEntity = null;
                     this.Pathing = false;
@@ -194,52 +239,66 @@ public class PlayerController : MonoBehaviour {
     /// appropriate entity was clicked.
     /// </summary>
     private void ActInContext() {
-        //Well, obviously we're not trying to do anything if there's no task.
-        if (this.Context == null) return;
+        //Well, obviously we're not trying to do anything if there's no task. //WE ARE!!!
+//        if (this.Context == null)
+//		{
+//			Globals.Instance.WorldGUI.selectedAction = -1;
+//			return;
+//		}
 		
 		
 		
         Debug.Log("Attempting contextual action: " + this.Context.Description);
 
         //Get the chracter script or item script that was clicked on. 
-        CharacterScript cScript = this.approachEntity.GetComponent<CharacterScript>();
-        ItemScript iScript = this.approachEntity.GetComponent<ItemScript>();
-
-        if (iScript != null && this.Context.Type == "pickup" && iScript.Item == this.Context.Item) {
+//        CharacterScript cScript = this.approachEntity.GetComponent<CharacterScript>();
+//        ItemScript iScript = this.approachEntity.GetComponent<ItemScript>();
+		
+		string[] actions = new string[11]{"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item", "cancel"};
+		string selectedAction = actions[Globals.Instance.WorldGUI.selectedAction];
+		
+        if (this.NonContextItem != null && selectedAction == "pickup") {
             //If we clicked on a pickup task item, pick it up.  Herp derp.
-            Globals.Instance.WorldScript.PickupItem(this.Context.Actor, iScript.Item);
-            this.Acted = true;
-        } else if (cScript == this.Context.Actee) {
-            //Presumably, we've done the right thing here.
-            this.Acted = true;
+            Globals.Instance.WorldScript.PickupItem(NonContextActor, this.NonContextItem.Item);
+			if(this.NonContextItem.Item == this.Context.Item)
+			{
+	            this.Acted = true;
+			}
+        } else {
+            //If we've done the right thing here.
+			if(this.NonContextActee == this.Context.Actee && this.Context.Type.Equals(selectedAction))
+			{
+            	this.Acted = true;
+			}
+			
             //If we clicked on a task chracter, check through possible tasks.
-            switch (this.Context.Type) {
+            switch (selectedAction) {
                 case "collect":
                 case "steal":
                 case "loot":
-                    this.Context.Actee.Inventory.Remove(this.Context.Item);
-                    this.Context.Actor.Inventory.Add(this.Context.Item);
+//                    this.NonContextActee.Inventory.Remove(this.Context.Item);
+//                    this.NonContextActor.Inventory.Add(this.Context.Item);
                     break;
                 case "deliver":
-                    this.Context.Actor.Inventory.Remove(this.Context.Item);
-                    this.Context.Actee.Inventory.Add(this.Context.Item);
+//                    this.NonContextActor.Inventory.Remove(this.Context.Item);
+//                    this.NonContextActee.Inventory.Add(this.Context.Item);
                     break;
                 case "enter-combat":
                     Globals.Instance.WorldScript.LoadBattle(this.Context);
-                    this.Context.Actee.Dead = true;
+                    this.NonContextActee.Dead = true;
                     break;
                 case "kill-by-item":
                 case "revive-by-item":
-                    this.Context.Actee.Dead = this.Context.Type == "kill-by-item";
+                    this.NonContextActee.Dead = selectedAction == "kill-by-item";
                     break;
                 default:
                     Debug.Log("Attempting to contextually act on an unknown task.");
                     this.Acted = false;
                     break;
             }
-
-            this.Acted = true;
         }
+		
+		Globals.Instance.WorldGUI.selectedAction = -1;
     }
 
     public void OnInput(OTObject owner) {
