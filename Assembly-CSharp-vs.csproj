@@ -109,6 +109,7 @@
      <Compile Include="Assets\Code Assets\StoryEngine\DramaManager.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\DramaManagerScript.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Task.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\TaskNode.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Episode.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\InitialState.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Proposition.cs" />
