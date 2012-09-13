@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Collections;
 using UnityEngine;
 
 using StoryEngine.Trace;
@@ -68,7 +70,15 @@ namespace StoryEngine {
                 //Something fucked up.
                 return false;
             }
-
+			
+			String s = "";
+			foreach (Link l in this.Episode.Links)
+			{
+				s += l.Source + " -> " + l.Target;
+			}
+			
+			Debug.Log(s);
+			
             //Convert the episode into executable tasks.
             this.Script = new List<Task>();
             foreach (StoryEvent ev in this.Episode.Events) {

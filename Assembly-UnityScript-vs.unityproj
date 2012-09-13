@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{6ACAF42E-B473-9205-0F58-2629F3BFD5B6}</ProjectGuid>
+	<ProjectGuid>{ADEFF0DB-AC57-34E8-871C-022E9E1312A5}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_OSX;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +69,7 @@
      <None Include="Assets\Art Assets\Sprites\RPGBattle\giantspider.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\freezer.xml" />
      <None Include="Assets\Data Assets\RPGWorld\bestiary.xml" />
+     <None Include="Assets\Data Assets\Resources\Episodes\Story1.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\blazer.xml" />
      <None Include="Assets\Data Assets\Resources\Episodes\016_genEp96143.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\cobaltmineral.xml" />
@@ -101,6 +102,7 @@
      <None Include="Assets\Art Assets\Sprites\RPGBattle\plasma.xml" />
      <None Include="Assets\Necromancer GUI\Kingthings.txt" />
      <None Include="Assets\Data Assets\Resources\Episodes\023_genEp96092.xml" />
+     <None Include="Assets\Data Assets\Resources\Episodes\000_bestEpisode.xml" />
      <None Include="Assets\Data Assets\Resources\Episodes\009_genEp96276.xml" />
      <None Include="Assets\Data Assets\RPGWorld\catalog.xml" />
      <None Include="Assets\Data Assets\Resources\Episodes\007_genEp96302.xml" />
@@ -120,7 +122,6 @@
      <None Include="Assets\Art Assets\Sprites\RPGBattle\andre.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\cloudHermit.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\female1.xml" />
-     <None Include="Assets\Data Assets\Resources\Episodes\bestEpisode.xml" />
      <None Include="Assets\AI\Resources\BehaviorTrees\PlayerBT.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\pouring.xml" />
      <None Include="Assets\Data Assets\RPGWorld\powerbook.xml" />
@@ -129,10 +130,10 @@
      <None Include="Assets\Data Assets\Resources\Episodes\011_genEp96211.xml" />
      <None Include="Assets\Data Assets\Resources\Episodes\014_genEp96145.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\toad.xml" />
- <Reference Include="Assets\RAIN\RAINOne">
+ <Reference Include="RAINOne">
  <HintPath>Assets\RAIN\RAINOne.dll</HintPath>
  </Reference>
- <Reference Include="Assets\RAIN\Recast">
+ <Reference Include="Recast">
  <HintPath>Assets\RAIN\Recast.dll</HintPath>
  </Reference>
   </ItemGroup>
