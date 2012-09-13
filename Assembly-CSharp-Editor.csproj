@@ -79,6 +79,7 @@
      <None Include="Assets\Art Assets\Sprites\RPGBattle\aquaelemental.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\windghost.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\male2.xml" />
+     <None Include="Assets\Data Assets\Resources\Episodes\Story1.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\ungoliant.xml" />
      <None Include="Assets\Orthello\-Read-Me.txt" />
      <None Include="Assets\Data Assets\Resources\Episodes\024_genEp96060.xml" />

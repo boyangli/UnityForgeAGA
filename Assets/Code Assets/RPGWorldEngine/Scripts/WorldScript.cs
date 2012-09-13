@@ -289,13 +289,13 @@ public class WorldScript : MonoBehaviour {
         List<string> enemyNames = new List<string>();
         string enemy = null;
 
-        //There's a 'hard' coded set of 4 enemies in stuff handed over by the ScenGen.
-        enemy = task.StoryEvent.GetValue("enemy1");
-        enemyNames.Add(this.CapCreatureName(enemy));
-        enemy = task.StoryEvent.GetValue("enemy2");
-        enemyNames.Add(this.CapCreatureName(enemy));
-        enemy = task.StoryEvent.GetValue("enemy3");
-        enemyNames.Add(this.CapCreatureName(enemy));
+//        //There's a 'hard' coded set of 4 enemies in stuff handed over by the ScenGen.
+//        enemy = task.StoryEvent.GetValue("enemy1");
+//        enemyNames.Add(this.CapCreatureName(enemy));
+//        enemy = task.StoryEvent.GetValue("enemy2");
+//        enemyNames.Add(this.CapCreatureName(enemy));
+//        enemy = task.StoryEvent.GetValue("enemy3");
+//        enemyNames.Add(this.CapCreatureName(enemy));
         //Quick name swap to put the actee in combat.
         switch (task.Actee.Name) {
             case "Yeti":

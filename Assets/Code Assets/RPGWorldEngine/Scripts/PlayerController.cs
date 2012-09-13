@@ -126,9 +126,38 @@ public class PlayerController : MonoBehaviour {
 		if(Globals.Instance.WorldGUI.selectedAction != -1)
 		{
 			Globals.Instance.WorldGUI.DisplayActionOptions = false;
-			this.ActInContext();
-			NonContextActor = NonContextActee = null;
-			NonContextItem = null;
+			
+			//"Talk", "Pick Up Item", "Trade Item", "Give Item", "Take Item", "Fight", "Steal Item", "Loot Item", "Kill With Item", "Revive With Item", "Cancel"
+			string[] actions = new string[11]{"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item", "cancel"};
+			string selectedAction = actions[Globals.Instance.WorldGUI.selectedAction];
+			
+			switch(selectedAction)
+			{
+				case "trade":
+				case "collect":
+        	    case "steal":
+        	    case "loot":
+				case "deliver":
+				case "kill-by-item":
+        	    case "revive-by-item":
+					Globals.Instance.WorldGUI.DisplayActorInventory = true;
+					Globals.Instance.WorldGUI.DisplayActeeInventory = true;
+					break;
+				default:
+					Globals.Instance.WorldGUI.DisplayActorInventory = false;
+					Globals.Instance.WorldGUI.DisplayActeeInventory = false;
+					break;
+			}
+			
+			if((!Globals.Instance.WorldGUI.DisplayActorInventory || !Globals.Instance.WorldGUI.DisplayActeeInventory) || (Globals.Instance.WorldGUI.selectedActorInventoryItem > -1 && Globals.Instance.WorldGUI.selectedActeeInventoryItem > -1))
+			{
+				this.ActInContext();
+				
+				Globals.Instance.WorldGUI.DisplayActorInventory = false;
+				Globals.Instance.WorldGUI.DisplayActeeInventory = false;
+				Globals.Instance.WorldGUI.Actor = Globals.Instance.WorldGUI.Actee = NonContextActor = NonContextActee = null;
+				NonContextItem = null;
+			}
 		}
 
         //Providing a 'clean' way to stop movement.
@@ -143,12 +172,15 @@ public class PlayerController : MonoBehaviour {
                     pather.moveTarget.TransformTarget = this.transform;
 					
                     //If action not selected from Action Selection GUI, set flag to pop up GUI.
-					if(Globals.Instance.WorldGUI.selectedAction == -1 && this.NonContextActor != this. NonContextActee)
+					if((Globals.Instance.WorldGUI.selectedAction == -1) && (this.NonContextActor != this.NonContextActee || this.NonContextActor == null || this. NonContextActee == null))
 					{
-						Globals.Instance.WorldGUI.DisplayActionOptions = true;
 						this.NonContextActor = this.gameObject.GetComponent<CharacterScript>();
 						this.NonContextActee = this.approachEntity.GetComponent<CharacterScript>();
 						this.NonContextItem = this.approachEntity.GetComponent<ItemScript>();
+						Globals.Instance.WorldGUI.Actor = this.NonContextActor;
+						Globals.Instance.WorldGUI.Actee = this.NonContextActee;
+						
+						Globals.Instance.WorldGUI.DisplayActionOptions = true;
 					}
 
                     this.approachEntity = null;
@@ -246,16 +278,26 @@ public class PlayerController : MonoBehaviour {
 //			return;
 //		}
 		
+		string[] actions = new string[11]{"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item", "cancel"};
+		string selectedAction = actions[Globals.Instance.WorldGUI.selectedAction];
 		
+		Item selectedActorItem = null;
+		Item selectedActeeItem = null;
+		
+		if(Globals.Instance.WorldGUI.selectedActorInventoryItem > 0)
+		{
+			selectedActorItem = this.NonContextActor.Inventory[Globals.Instance.WorldGUI.selectedActorInventoryItem - 1];
+		}
+		if(Globals.Instance.WorldGUI.selectedActeeInventoryItem > 0)
+		{
+			selectedActeeItem = this.NonContextActee.Inventory[Globals.Instance.WorldGUI.selectedActeeInventoryItem - 1];
+		}
 		
         Debug.Log("Attempting contextual action: " + this.Context.Description);
 
         //Get the chracter script or item script that was clicked on. 
 //        CharacterScript cScript = this.approachEntity.GetComponent<CharacterScript>();
 //        ItemScript iScript = this.approachEntity.GetComponent<ItemScript>();
-		
-		string[] actions = new string[11]{"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item", "cancel"};
-		string selectedAction = actions[Globals.Instance.WorldGUI.selectedAction];
 		
         if (this.NonContextItem != null && selectedAction == "pickup") {
             //If we clicked on a pickup task item, pick it up.  Herp derp.
@@ -265,40 +307,86 @@ public class PlayerController : MonoBehaviour {
 	            this.Acted = true;
 			}
         } else {
-            //If we've done the right thing here.
-			if(this.NonContextActee == this.Context.Actee && this.Context.Type.Equals(selectedAction))
-			{
-            	this.Acted = true;
-			}
-			
+			bool correctItemNotSelected = false;
+            
+			//"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item"
             //If we clicked on a task chracter, check through possible tasks.
             switch (selectedAction) {
+				case "talk":
+					//TODO
+					break;
+                case "trade":
+					if(selectedActorItem == null || selectedActeeItem == null)
+					{
+						correctItemNotSelected = true;
+					}
+					else
+					{
+						this.NonContextActee.Inventory.Remove(selectedActeeItem);
+                    	this.NonContextActor.Inventory.Add(selectedActeeItem);
+						this.NonContextActor.Inventory.Remove(selectedActorItem);
+                    	this.NonContextActee.Inventory.Add(selectedActorItem);
+					}
+					break;
                 case "collect":
                 case "steal":
                 case "loot":
-//                    this.NonContextActee.Inventory.Remove(this.Context.Item);
-//                    this.NonContextActor.Inventory.Add(this.Context.Item);
+					if(selectedActeeItem == null)
+					{
+						correctItemNotSelected = true;
+					}
+					else
+					{
+ 	                	this.NonContextActee.Inventory.Remove(selectedActeeItem);
+                    	this.NonContextActor.Inventory.Add(selectedActeeItem);
+					}
                     break;
                 case "deliver":
-//                    this.NonContextActor.Inventory.Remove(this.Context.Item);
-//                    this.NonContextActee.Inventory.Add(this.Context.Item);
-                    break;
+					if(selectedActorItem == null)
+					{
+						correctItemNotSelected = true;
+					}
+					else
+					{
+                    	this.NonContextActor.Inventory.Remove(selectedActorItem);
+                    	this.NonContextActee.Inventory.Add(selectedActorItem);
+					}
+					break;
                 case "enter-combat":
-                    Globals.Instance.WorldScript.LoadBattle(this.Context);
+                    Globals.Instance.WorldScript.LoadBattle(new Task("enter-combat", this.NonContextActor, this.NonContextActee, new Item("FightItem", "Item For Fighting"), this.NonContextActor.Locale));
                     this.NonContextActee.Dead = true;
                     break;
                 case "kill-by-item":
                 case "revive-by-item":
-                    this.NonContextActee.Dead = selectedAction == "kill-by-item";
+                    if(selectedActorItem == null)
+					{
+						correctItemNotSelected = true;
+					}
+					else
+					{
+						this.NonContextActee.Dead = selectedAction == "kill-by-item";
+					}
                     break;
                 default:
                     Debug.Log("Attempting to contextually act on an unknown task.");
                     this.Acted = false;
                     break;
             }
+			
+			//If we've done the right thing here.
+			if(this.NonContextActee == this.Context.Actee && this.Context.Type.Equals(selectedAction) && !correctItemNotSelected)
+			{
+            	this.Acted = true;
+			}
+			else
+			{
+				this.Acted = false;
+			}
         }
 		
 		Globals.Instance.WorldGUI.selectedAction = -1;
+		Globals.Instance.WorldGUI.selectedActorInventoryItem = -1;
+		Globals.Instance.WorldGUI.selectedActeeInventoryItem = -1;
     }
 
     public void OnInput(OTObject owner) {

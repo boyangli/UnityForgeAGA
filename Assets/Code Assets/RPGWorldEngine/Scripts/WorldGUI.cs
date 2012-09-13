@@ -164,6 +164,8 @@ public class WorldGUI : MonoBehaviour {
                    (this.storyBounds.Contains(mouse) && this.displayStoryBuffer) ||
                    (this.localeBounds.Contains(mouse) && this.displayLocalesBuffer) ||
                    (this.actionBounds.Contains(mouse) && this.displayActionOptions) ||
+                   (this.actorInventoryBounds.Contains(mouse) && this.displayActorInventory) ||
+                   (this.acteeInventoryBounds.Contains(mouse) && this.displayActeeInventory) ||
                    this.DisplayThanks;
         }
     }
@@ -204,12 +206,28 @@ public class WorldGUI : MonoBehaviour {
 	
     #endregion
 	
-	
+	//Action Selection dialogue box
 	public bool DisplayActionOptions { get; set; }
 	private bool displayActionOptions;
-	public Vector2 ActionBounds = new Vector2(320, 256); 
+	public Vector2 ActionBounds = new Vector2(480, 320); 
 	private Rect actionBounds;
 	public int selectedAction;
+	
+	//Actor Inventory Selection dialogue box
+	public bool DisplayActorInventory { get; set; }
+	private bool displayActorInventory;
+	public Vector2 ActorInventoryBounds = new Vector2(320, 256); 
+	private Rect actorInventoryBounds;
+	public int selectedActorInventoryItem;
+	public CharacterScript Actor;
+	
+	//Actee Inventory Selection dialogue box
+	public bool DisplayActeeInventory { get; set; }
+	private bool displayActeeInventory;
+	public Vector2 ActeeInventoryBounds = new Vector2(320, 256); 
+	private Rect acteeInventoryBounds;
+	public int selectedActeeInventoryItem;
+	public CharacterScript Actee;
 	
     // Use this for initialization
     void Start() {
@@ -220,7 +238,11 @@ public class WorldGUI : MonoBehaviour {
         this.DisplayLocales = false;
         this.DisplayThanks = false;
 		this.DisplayActionOptions = false;
+		this.DisplayActorInventory = false;
+		this.DisplayActeeInventory = false;
 		selectedAction = -1;
+		selectedActorInventoryItem = -1;
+		selectedActeeInventoryItem = -1;
     }
 
     // Update is called once per frame
@@ -232,6 +254,8 @@ public class WorldGUI : MonoBehaviour {
         this.displayStoryBuffer = this.DisplayStory;
         this.displayLocalesBuffer = this.DisplayLocales;
         this.displayActionOptions = this.DisplayActionOptions;
+		this.displayActorInventory = this. DisplayActorInventory;
+		this.displayActeeInventory = this. DisplayActeeInventory;
         //Check to see if the DM is finished running.
         this.DisplayEpisodes = Globals.Instance.DMScript.DramaManager.EpisodeFinished;
 
@@ -290,10 +314,22 @@ public class WorldGUI : MonoBehaviour {
             this.ThanksBounds.x,
             this.ThanksBounds.y);
 		this.actionBounds = new Rect (
-			(Screen.width - this.ActionBounds.x) / 2,
-            Screen.height - this.ActionBounds.y,
-            this.ActionBounds.x,
-            this.ActionBounds.y
+			(Screen.width - this.ActionBounds.x * 1.5f) / 2,
+            Screen.height - this.ActionBounds.y * 1.25f,
+            this.ActionBounds.x * 1.5f,
+            this.ActionBounds.y * 1.25f
+			);
+		this.actorInventoryBounds = new Rect (
+			(Screen.width - this.ActorInventoryBounds.x) / 4 - 50,
+            Screen.height - this.ActorInventoryBounds.y,
+            this.ActorInventoryBounds.x * 3,
+            this.ActorInventoryBounds.y
+			);
+		this.acteeInventoryBounds = new Rect (
+			(Screen.width - this.ActeeInventoryBounds.x) * 3 / 4 + 50,
+            Screen.height - this.ActeeInventoryBounds.y,
+            this.ActeeInventoryBounds.x,
+            this.ActeeInventoryBounds.y
 			);
 
         //Don't draw the window if we're not supposed to be displaying.
@@ -304,6 +340,8 @@ public class WorldGUI : MonoBehaviour {
         //if (this.displayLocalesBuffer) GUI.Window(4, this.localeBounds, this.DrawLocales, "");
         if (this.DisplayThanks) GUI.Window(5, this.thanksBounds, this.DrawThanks, "");
 		if (this.displayActionOptions) GUI.Window(6, this.actionBounds, this.drawActions, "");
+		if (this.displayActorInventory) GUI.Window(7, this.actorInventoryBounds, this.drawActorInventory, "");
+		if (this.displayActeeInventory) GUI.Window(8, this.acteeInventoryBounds, this.drawActeeInventory, "");
         //Reset font sizes.
         this.Skin.GetStyle("LightText").fontSize = size;
         this.Skin.GetStyle("LegendaryText").fontSize = size;
@@ -580,7 +618,8 @@ public class WorldGUI : MonoBehaviour {
         this.AddSpikes(this.actionBounds.width);
 		this.FancyTop(this.actionBounds.width);
         //GUILayout.Space(8);
-        GUILayout.BeginVertical();        
+        GUILayout.BeginVertical();
+		GUILayout.Label(this.Actor.Name + "'s Inventory");
 		this.selectedAction = GUILayout.SelectionGrid(this.selectedAction, actions, 3);
         //Some very selective style swapping in order to render a better scroll bar and buttons.
         GUI.skin = this.defaultSkin;
@@ -589,8 +628,122 @@ public class WorldGUI : MonoBehaviour {
         GUILayout.EndVertical();        
 		if (this.selectedAction != -1)
 		{
-			print("selected " + this.selectedAction);
-			this.displayActionOptions = false;
+			print("Selected Action " + this.selectedAction);
+			//this.displayActionOptions = false;
+		}
+    }
+	
+	/// <summary>
+	/// Draws the actor inventory.
+	/// </summary>
+	/// <param name='windowID'>
+	/// Window I.
+	/// </param>
+	private void drawActorInventory(int windowID) {
+        // use the spike function to add the spikes
+        this.AddSpikes(this.actorInventoryBounds.width);
+
+        //GUILayout.Space(8);
+        GUILayout.BeginVertical();
+        GUILayout.Label(this.Actor.Name + "'s Inventory");
+
+        //Check to see if the party has any items.
+        if (this.Actor.Inventory.Count == 0) {
+            //Quick style swap.
+            FontStyle style = this.Skin.GetStyle("LightText").fontStyle;
+            this.Skin.GetStyle("LightText").fontStyle = FontStyle.Italic;
+            GUILayout.Label(this.Actor.Name + " does not posses any items.", "LightText");
+            //Replace the style.
+            this.Skin.GetStyle("LightText").fontStyle = style;
+        }
+
+        //Some very selective style swapping in order to render a better scroll bar.
+        GUI.skin = this.defaultSkin;
+        this.invScroll = GUILayout.BeginScrollView(this.invScroll, false, false);
+        GUI.skin = this.Skin;
+		
+		string[] ActorInventory = new string[this.Actor.Inventory.Count + 1];
+		int i = 0;
+		ActorInventory[i++] = "No Item Selected";
+		
+        //Draw each item to the window.
+        foreach (Item item in this.Actor.Inventory) {
+//            GUILayout.Label(item.Name, "LegendaryText");
+//            GUILayout.Label(item.Description, "LightText");
+//            GUILayout.Space(12);
+			ActorInventory[i++] = item.Name;
+        }
+		
+		this.selectedActorInventoryItem = GUILayout.SelectionGrid(this.selectedActorInventoryItem, ActorInventory, 2);
+		
+        //A little more very selective swapping.
+        GUI.skin = this.defaultSkin;
+        GUILayout.EndScrollView();
+        GUI.skin = this.Skin;
+
+        GUILayout.EndVertical();
+		        
+		if (this.selectedActorInventoryItem != -1)
+		{
+			print("Selected Actor " + this.selectedActorInventoryItem);
+			this.displayActorInventory = false;
+		}
+    }
+	
+	/// <summary>
+	/// Draws the actee inventory.
+	/// </summary>
+	/// <param name='windowID'>
+	/// Window I.
+	/// </param>
+	private void drawActeeInventory(int windowID) {
+        // use the spike function to add the spikes
+        this.AddSpikes(this.acteeInventoryBounds.width);
+
+        //GUILayout.Space(8);
+        GUILayout.BeginVertical();
+        GUILayout.Label(this.Actee.Name + "'s Inventory");
+
+        //Check to see if the party has any items.
+        if (this.Actee.Inventory.Count == 0) {
+            //Quick style swap.
+            FontStyle style = this.Skin.GetStyle("LightText").fontStyle;
+            this.Skin.GetStyle("LightText").fontStyle = FontStyle.Italic;
+            GUILayout.Label(this.Actee.Name + " does not posses any items.", "LightText");
+            //Replace the style.
+            this.Skin.GetStyle("LightText").fontStyle = style;
+        }
+
+        //Some very selective style swapping in order to render a better scroll bar.
+        GUI.skin = this.defaultSkin;
+        this.invScroll = GUILayout.BeginScrollView(this.invScroll, false, false);
+        GUI.skin = this.Skin;
+		
+		string[] ActeeInventory = new string[this.Actee.Inventory.Count + 1];
+		int i = 0;
+		ActeeInventory[i++] = "No Item Selected";
+		
+        //Draw each item to the window.
+        foreach (Item item in this.Actee.Inventory) {
+//            GUILayout.Label(item.Name, "LegendaryText");
+//            GUILayout.Label(item.Description, "LightText");
+//            GUILayout.Space(12);
+			ActeeInventory[i++] = item.Name;
+        }
+	
+		this.selectedActeeInventoryItem = GUILayout.SelectionGrid(this.selectedActeeInventoryItem, ActeeInventory, 2);
+		
+        //A little more very selective swapping.
+        GUI.skin = this.defaultSkin;
+        GUILayout.EndScrollView();
+        GUI.skin = this.Skin;
+
+        GUILayout.EndVertical();
+		        
+		if (this.selectedActeeInventoryItem != -1)
+		{
+			print("Selected Actee " + this.selectedActeeInventoryItem);
+			this.displayActeeInventory = false;
 		}
     }
 
