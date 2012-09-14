@@ -4,8 +4,9 @@ using System.Collections.Generic;
 
 public class TaskNode{
 	
-	List<TaskNode> children {get; set;}
-	List<TaskNode> parents {get; set;}
+	List<TaskNode> children { get; set; }
+	List<TaskNode> parents { get; set; }
+	Task data { get; set; }
 	
-	public bool done {get; set;}
+	public bool done { get; set; }
 }
