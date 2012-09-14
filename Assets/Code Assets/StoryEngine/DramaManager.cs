@@ -137,11 +137,27 @@ namespace StoryEngine {
 
             //Ignore these and load the task next frame.
             if (next.Type == "affinity-gain") return;
-
-            //Repair and set relevant pointers.
-            this.EmergencyRepair(next);
-            this.CurrentTask = next;
-            this.CurrentTask.Actor.ActiveTask = next;
+			
+			//Modified To ignore RAIN
+			PlayerController player = next.Actor.gameObject.GetComponent<PlayerController>();
+			
+			if(player != null)
+			{
+            
+				//Repair and set relevant pointers.
+            	this.EmergencyRepair(next);
+            	this.CurrentTask = next;
+            	this.CurrentTask.Actor.ActiveTask = next;
+				
+				player.Context = next;
+				
+				//Get the gui script and task.
+        		WorldGUI wgui = Globals.Instance.WorldGUI;
+				
+		        //Set the dialogue and flag the GUI to display it.
+    		    wgui.Dialogue = this.CurrentTask.Actor.ActiveTask.PreDialogue;
+	        	wgui.DisplayDialogue = true;
+			}
         }
 
         /// <summary>

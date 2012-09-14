@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{D3E406B4-DBBB-5A79-CE70-C30922C1B637}</ProjectGuid>
+	<ProjectGuid>{61C92A28-E538-DEEE-6007-342CADB2B08D}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_OSX;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,10 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +79,6 @@
      <None Include="Assets\Art Assets\Sprites\RPGBattle\aquaelemental.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\windghost.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\male2.xml" />
-     <None Include="Assets\Data Assets\Resources\Episodes\Story1.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\ungoliant.xml" />
      <None Include="Assets\Orthello\-Read-Me.txt" />
      <None Include="Assets\Data Assets\Resources\Episodes\024_genEp96060.xml" />
@@ -118,25 +117,25 @@
      <None Include="Assets\Data Assets\Resources\Episodes\011_genEp96211.xml" />
      <None Include="Assets\Data Assets\Resources\Episodes\014_genEp96145.xml" />
      <None Include="Assets\Art Assets\Sprites\RPGBattle\toad.xml" />
- <Reference Include="Assembly-UnityScript">
+ <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
  </Reference>
- <Reference Include="RAINOne">
+ <Reference Include="Assets\RAIN\RAINOne">
  <HintPath>Assets\RAIN\RAINOne.dll</HintPath>
  </Reference>
- <Reference Include="Recast">
+ <Reference Include="Assets\RAIN\Recast">
  <HintPath>Assets\RAIN\Recast.dll</HintPath>
  </Reference>
- <Reference Include="RAINEditor">
+ <Reference Include="Assets\RAIN\Editor\RAINEditor">
  <HintPath>Assets\RAIN\Editor\RAINEditor.dll</HintPath>
  </Reference>
- <Reference Include="RecastEditor">
+ <Reference Include="Assets\RAIN\Editor\RecastEditor">
  <HintPath>Assets\RAIN\Editor\RecastEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
-      <Project>{B4D96C03-939D-774B-303F-0167A2309B0F}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
+      <Project>{257FF719-16BF-5B1B-9A3B-7FDF12C70BBC}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -66,6 +66,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 	private ItemScript nc_item;
+	
+	public bool PostDialogueStarted = false;
+	
     /// <summary>
     /// If true, indicates that the contextual task has been executed.
     /// </summary>
@@ -121,6 +124,12 @@ public class PlayerController : MonoBehaviour {
 
         //Handle contextual left clicks.
         if (Input.GetMouseButtonDown(0)) this.HandleClick();
+		
+		if(PostDialogueStarted && Globals.Instance.WorldGUI.Dialogue.Spoken)
+		{
+			Globals.Instance.WorldGUI.Dialogue = null;
+			PostDialogueTaskDone();
+		}
 		
 		//If Action Selection GUI is done and selection made.
 		if(Globals.Instance.WorldGUI.selectedAction != -1)
@@ -198,7 +207,11 @@ public class PlayerController : MonoBehaviour {
 
         //Check for completion of GoTo tasks each frame.
         if (this.Context != null && this.Context.Type == "goto") {
-            if (this.Context.Actor.Locale == this.Context.Locale) this.Acted = true;
+            if (this.Context.Actor.Locale == this.Context.Locale) 
+			{
+				TaskDone();
+				//this.Acted = true;
+			}
         }
     }
 
@@ -293,7 +306,7 @@ public class PlayerController : MonoBehaviour {
 			selectedActeeItem = this.NonContextActee.Inventory[Globals.Instance.WorldGUI.selectedActeeInventoryItem - 1];
 		}
 		
-        Debug.Log("Attempting contextual action: " + this.Context.Description);
+        Debug.Log("Task Description: " + this.Context.Description);
 
         //Get the chracter script or item script that was clicked on. 
 //        CharacterScript cScript = this.approachEntity.GetComponent<CharacterScript>();
@@ -304,7 +317,8 @@ public class PlayerController : MonoBehaviour {
             Globals.Instance.WorldScript.PickupItem(NonContextActor, this.NonContextItem.Item);
 			if(this.NonContextItem.Item == this.Context.Item)
 			{
-	            this.Acted = true;
+				TaskDone();
+	            //this.Acted = true;
 			}
         } else {
 			bool correctItemNotSelected = false;
@@ -376,7 +390,8 @@ public class PlayerController : MonoBehaviour {
 			//If we've done the right thing here.
 			if(this.NonContextActee == this.Context.Actee && this.Context.Type.Equals(selectedAction) && !correctItemNotSelected)
 			{
-            	this.Acted = true;
+            	//this.Acted = true;
+				TaskDone();
 			}
 			else
 			{
@@ -388,6 +403,29 @@ public class PlayerController : MonoBehaviour {
 		Globals.Instance.WorldGUI.selectedActorInventoryItem = -1;
 		Globals.Instance.WorldGUI.selectedActeeInventoryItem = -1;
     }
+	
+	public void TaskDone()
+	{
+		//Mark task as done
+		this.Acted = true;
+		
+		//Get the gui script and task.
+        WorldGUI wgui = Globals.Instance.WorldGUI;
+
+        //Set the dialogue and flag the GUI to display it.
+        wgui.Dialogue = this.Context.Actor.gameObject.GetComponent<CharacterScript>().ActiveTask.PostDialogue;
+        wgui.DisplayDialogue = true;
+		
+		PostDialogueStarted = true;
+	}
+	
+	public void PostDialogueTaskDone()
+	{
+		CharacterScript charScript = this.Context.Actor.gameObject.GetComponent<CharacterScript>();
+		PostDialogueStarted = false;
+		charScript.ActiveTask = null;
+		this.Context = null;
+	}
 
     public void OnInput(OTObject owner) {
         Debug.Log("Click detected.");

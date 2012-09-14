@@ -19,10 +19,10 @@ public class CheckTaskCompletion : Action {
     }
 
     public override ActionResult Start(Agent agent, float deltaTime) {
-        //Get the current task and assign it to the player controller.
-        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
+//        //Get the current task and assign it to the player controller.
+//        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
         this.controller = this.actionContext.GetContextItem<PlayerController>("controller");
-        this.controller.Context = task;
+//        this.controller.Context = task;
 
         return ActionResult.SUCCESS;
     }
@@ -32,13 +32,14 @@ public class CheckTaskCompletion : Action {
         agent.PathManager.Move(agent, deltaTime);
 
         //Check if the player has acted yet.
-        if (this.controller.Acted) return ActionResult.SUCCESS;
-        return ActionResult.RUNNING;
+//        if (this.controller.Acted) 
+			return ActionResult.SUCCESS;
+//        return ActionResult.RUNNING;
     }
 
     public override ActionResult Stop(Agent agent, float deltaTime) {
         //Clear the player controller's contextual task.
-        this.actionContext.GetContextItem<PlayerController>("controller").Context = null;
+//        this.actionContext.GetContextItem<PlayerController>("controller").Context = null;
         return ActionResult.SUCCESS;
     }
 }

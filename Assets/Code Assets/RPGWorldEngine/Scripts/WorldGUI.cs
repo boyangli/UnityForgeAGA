@@ -452,7 +452,7 @@ public class WorldGUI : MonoBehaviour {
         //Reset window and mark dialogue as spoken.
         this.DisplayDialogue = !done;
         this.Dialogue.Spoken = done;
-        if(done) this.Dialogue = null;
+//        if(done) this.Dialogue = null;
 
         GUILayout.EndVertical();
 

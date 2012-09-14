@@ -19,8 +19,8 @@ public class CompleteTask : Action
 
 	public override ActionResult Execute(Agent agent, float deltaTime)
 	{
-        //Set task to null.  Done.
-        this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask = null;
+//        //Set task to null.  Done.
+//        this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask = null;
 		return ActionResult.SUCCESS;
 	}
 

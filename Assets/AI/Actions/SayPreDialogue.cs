@@ -17,13 +17,13 @@ public class SayPreDialogue : Action
 
 	public override ActionResult Start(Agent agent, float deltaTime)
 	{
-        //Get the gui script and task.
-        WorldGUI wgui = Globals.Instance.WorldGUI;
-        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
-
-        //Set the dialogue and flag the GUI to display it.
-        wgui.Dialogue = task.PreDialogue;
-        wgui.DisplayDialogue = true;
+//        //Get the gui script and task.
+//        WorldGUI wgui = Globals.Instance.WorldGUI;
+//        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
+//
+//        //Set the dialogue and flag the GUI to display it.
+//        wgui.Dialogue = task.PreDialogue;
+//        wgui.DisplayDialogue = true;
 
 		return ActionResult.SUCCESS;
 	}
@@ -33,8 +33,9 @@ public class SayPreDialogue : Action
 		//Get the gui script and check for dialogue close.
         Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
 
-        if (task.PreDialogue.Spoken) return ActionResult.SUCCESS;
-        else return ActionResult.RUNNING;
+//        if (task.PreDialogue.Spoken)
+			return ActionResult.SUCCESS;
+//        else return ActionResult.RUNNING;
 	}
 
 	public override ActionResult Stop(Agent agent, float deltaTime)
