@@ -5,6 +5,13 @@ using RAIN.Sensors;
 using StoryEngine;
 using WorldEngine;
 using WorldEngine.Items;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
+using System.Text;
+using System.IO;
+using StoryEngine.Trace;
 
 public class PlayerController : MonoBehaviour {
 
@@ -29,6 +36,9 @@ public class PlayerController : MonoBehaviour {
             this.Acted = false;
         }
     }
+	
+	public List<TaskNode> activeTasks;
+	
     private Task m_Context;
 	/// <summary>
 	/// Gets or sets the non-context actor.
@@ -99,6 +109,8 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start() {
         //this.gameObject.GetComponent<OTAnimatingSprite>().onInput = this.OnInput;
+		activeTasks = new List<TaskNode>();
+		Acted = false;
     }
 
     /// <summary>
@@ -123,13 +135,13 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Handle contextual left clicks.
-        if (Input.GetMouseButtonDown(0)) this.HandleClick();
-		
-		if(PostDialogueStarted && Globals.Instance.WorldGUI.Dialogue.Spoken)
-		{
-			Globals.Instance.WorldGUI.Dialogue = null;
-			PostDialogueTaskDone();
+        if (Input.GetMouseButtonDown(0)){
+			Debug.Log("random message");
+			this.HandleClick();	
 		}
+		
+		
+		
 		
 		//If Action Selection GUI is done and selection made.
 		if(Globals.Instance.WorldGUI.selectedAction != -1)
@@ -147,7 +159,7 @@ public class PlayerController : MonoBehaviour {
         	    case "steal":
         	    case "loot":
 				case "deliver":
-				case "kill-by-item":
+				case "kill-by-item":					
         	    case "revive-by-item":
 					Globals.Instance.WorldGUI.DisplayActorInventory = true;
 					Globals.Instance.WorldGUI.DisplayActeeInventory = true;
@@ -204,17 +216,22 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
-
+		
+		if (this.activeTasks != null)
+		{
         //Check for completion of GoTo tasks each frame.
-        if (this.Context != null && this.Context.Type == "goto") {
-            if (this.Context.Actor.Locale == this.Context.Locale) 
+		foreach(TaskNode tn in this.activeTasks)
+		{
+			Task task = tn.data;
+			if (task.Type.Equals("goto") && task.Actor.Locale == task.Locale)
 			{
-				TaskDone();
-				//this.Acted = true;
+				TaskDone(tn);
 			}
-        }
-    }
+		}
+		}
 
+    }
+	
     /// <summary>
     /// Performs a raycast into the world from the current mouse position while
     /// yeilding to the GUI.
@@ -306,7 +323,7 @@ public class PlayerController : MonoBehaviour {
 			selectedActeeItem = this.NonContextActee.Inventory[Globals.Instance.WorldGUI.selectedActeeInventoryItem - 1];
 		}
 		
-        Debug.Log("Task Description: " + this.Context.Description);
+        //Debug.Log("Task Description: " + this.Context.Description);
 
         //Get the chracter script or item script that was clicked on. 
 //        CharacterScript cScript = this.approachEntity.GetComponent<CharacterScript>();
@@ -315,11 +332,11 @@ public class PlayerController : MonoBehaviour {
         if (this.NonContextItem != null && selectedAction == "pickup") {
             //If we clicked on a pickup task item, pick it up.  Herp derp.
             Globals.Instance.WorldScript.PickupItem(NonContextActor, this.NonContextItem.Item);
-			if(this.NonContextItem.Item == this.Context.Item)
+			IEnumerable<TaskNode> possible = this.activeTasks.Where(t => t.data.Type.Equals("pickup") && t.data.Item == this.NonContextItem.Item);
+			foreach(TaskNode p in possible)
 			{
-				TaskDone();
-	            //this.Acted = true;
-			}
+				TaskDone(p);
+			}			
         } else {
 			bool correctItemNotSelected = false;
             
@@ -383,19 +400,17 @@ public class PlayerController : MonoBehaviour {
                     break;
                 default:
                     Debug.Log("Attempting to contextually act on an unknown task.");
-                    this.Acted = false;
                     break;
             }
 			
+			if (activeTasks != null)
+			{
 			//If we've done the right thing here.
-			if(this.NonContextActee == this.Context.Actee && this.Context.Type.Equals(selectedAction) && !correctItemNotSelected)
-			{
-            	//this.Acted = true;
-				TaskDone();
+			IEnumerable<TaskNode> possible = this.activeTasks.Where(t => this.NonContextActee == t.data.Actee && t.data.Type.Equals(selectedAction) && !correctItemNotSelected);
+			foreach(TaskNode p in possible)
+			{            	
+				TaskDone(p);
 			}
-			else
-			{
-				this.Acted = false;
 			}
         }
 		
@@ -404,27 +419,23 @@ public class PlayerController : MonoBehaviour {
 		Globals.Instance.WorldGUI.selectedActeeInventoryItem = -1;
     }
 	
-	public void TaskDone()
+	public void TaskDone(TaskNode task)
 	{
-		//Mark task as done
-		this.Acted = true;
-		
+		task.done = true;
 		//Get the gui script and task.
         WorldGUI wgui = Globals.Instance.WorldGUI;
 
         //Set the dialogue and flag the GUI to display it.
-        wgui.Dialogue = this.Context.Actor.gameObject.GetComponent<CharacterScript>().ActiveTask.PostDialogue;
-        wgui.DisplayDialogue = true;
-		
+        wgui.Dialogues.Add(task.data.PostDialogue);
+        wgui.DisplayDialogue = true;		
 		PostDialogueStarted = true;
 	}
 	
 	public void PostDialogueTaskDone()
 	{
-		CharacterScript charScript = this.Context.Actor.gameObject.GetComponent<CharacterScript>();
+		//CharacterScript charScript = this.Context.Actor.gameObject.GetComponent<CharacterScript>();
 		PostDialogueStarted = false;
-		charScript.ActiveTask = null;
-		this.Context = null;
+		//charScript.ActiveTask = null;
 	}
 
     public void OnInput(OTObject owner) {

@@ -27,12 +27,12 @@ namespace StoryEngine.Trace {
         /// <summary>
         /// Private constructor for the purposes of serialization.
         /// </summary>
-        public Episode(int a) {
+		/* public Episode(int a) {
             this.ID = "unassigned";
 			Links = new List<Link>();
 			Links.Add(new Link(1, 0));
         }
-		
+		*/
 		private Episode() {this.ID = "unassigned";}
 		
 
@@ -44,9 +44,9 @@ namespace StoryEngine.Trace {
         public static Episode Deserialize(string xml) {
             XmlSerializer serializer = new XmlSerializer(typeof(Episode));
 			
-			System.IO.StreamWriter writer  = new System.IO.StreamWriter(@".\WriteLines2.txt");
+			//System.IO.StreamWriter writer  = new System.IO.StreamWriter(@".\WriteLines2.txt");
 			
-			serializer.Serialize(writer, new Episode(2));
+			//serializer.Serialize(writer, new Episode(2));
 
             StringReader reader = new StringReader(xml);
             Episode ep = (Episode)serializer.Deserialize(reader);

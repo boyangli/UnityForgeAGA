@@ -17,6 +17,7 @@ namespace StoryEngine {
         /// The type of this task.  This is left as a string for better
         /// integration with RAIN{one} behavior trees.
         /// </summary>
+        /// 
         public string Type { get; private set; }
         /// <summary>
         /// The parsed description of this task.
@@ -50,6 +51,8 @@ namespace StoryEngine {
         /// The raw StoryEvent from the deserialized XML.
         /// </summary>
         public StoryEvent StoryEvent { get; private set; }
+		
+		public int ID {get; set;}
 
         /// <summary>
         /// Creates a task datastructure with the given values.
@@ -104,7 +107,8 @@ namespace StoryEngine {
         public Task(StoryEvent ev) {
             //Save us some typing.
             WorldScript ws = Globals.Instance.WorldScript;
-
+			
+			this.ID = ev.ID;
             this.Type = ev.Name;
             this.Actor = ws.GetCharacterByName(ev.GetValue("character1"));
             this.Actee = ws.GetCharacterByName(ev.GetValue("character2"));
