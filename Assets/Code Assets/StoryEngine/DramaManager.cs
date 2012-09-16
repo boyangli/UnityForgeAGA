@@ -220,6 +220,8 @@ namespace StoryEngine
 				}
 			}
 			
+			WorldGUI wgui = Globals.Instance.WorldGUI;
+			bool show = false;
 			foreach (TaskNode node in fringe) {
 				// process one task in the frigine
 				PlayerController player = node.data.Actor.gameObject.GetComponent<PlayerController> ();
@@ -232,23 +234,22 @@ namespace StoryEngine
 				//this.CurrentTask.Actor.ActiveTask = next;
 				List<TaskNode> active = player.activeTasks;
 				
-				WorldGUI wgui = Globals.Instance.WorldGUI;
-				
 				String text = "";
-				bool show = false;
+				
 				if (player.activeTasks != null && !player.activeTasks.Contains (node)) {												
 					player.activeTasks.Add(node);
 					Dialogue d = node.data.PreDialogue;
-					wgui.Dialogues.Add (d);
-					show = true;
+					
+					if(!d.Line.Trim().Equals(""))
+					{
+						wgui.Dialogues.Add (d);
+						show = true;
+					}
+					
 					Debug.Log ("activated task: " + node.data.Type + ", " + node.data.Description);
 				}
-				
-				
-				
-				wgui.DisplayDialogue = show;				
-
 			}
+			wgui.DisplayDialogue = show;				
 		}
         
 
