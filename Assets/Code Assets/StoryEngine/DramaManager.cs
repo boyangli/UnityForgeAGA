@@ -27,6 +27,7 @@ namespace StoryEngine
 		public List<Task> Script { get; private set; }
 
 		public TaskNode scriptRoot;
+		public List<TaskNode> endings;
 		public List<TaskNode> history;
 		/// <summary>
 		/// The raw episode, in case that's needed.
@@ -86,7 +87,7 @@ namespace StoryEngine
 			
 			Debug.Log (s);
 			
-			this.scriptRoot = buildTaskGraph (this.Episode.Events, this.Episode.Links);
+			buildTaskGraph (this.Episode.Events, this.Episode.Links);
 			this.history = new List<TaskNode> ();           
 
 			this.InitializeWorld ();
@@ -97,7 +98,7 @@ namespace StoryEngine
 			return true;
 		}
 		
-		private TaskNode buildTaskGraph (List<StoryEvent> events, List<Link> links)
+		private void buildTaskGraph (List<StoryEvent> events, List<Link> links)
 		{
 			Dictionary<int, TaskNode> dictionary = new Dictionary<int, TaskNode> ();
 			foreach (StoryEvent e in events) {
@@ -122,7 +123,13 @@ namespace StoryEngine
 					roots.Add (pair.Value);
 			}
 			// TODO: throw an exception when there are more than one root
-			return roots.ElementAt (0);			
+			this.scriptRoot = roots.ElementAt (0);
+			
+			this.endings = new List<TaskNode>();
+			foreach (KeyValuePair<int, TaskNode> pair in dictionary) {
+				if (pair.Value.children.Count == 0)
+					endings.Add (pair.Value);
+			}
 		}
 		
 		/// <summary>
@@ -160,14 +167,38 @@ namespace StoryEngine
 			
 			if (player != null) {
 				List<TaskNode> active = player.activeTasks;
+				List<TaskNode> deleted = new List<TaskNode>();
 			
 				WorldGUI wgui = Globals.Instance.WorldGUI;
 				if (wgui.Dialogues.Count == 0 && active != null && (active.Exists (node => node.done) || active.Count == 0)) {
-					history.AddRange (active.Where (node => node.done));
+					foreach(TaskNode tn in active)
+					{
+						if (tn.done)
+						{
+							history.Add(tn);
+							deleted.Add(tn);
+							if (endings.Contains(tn))
+							{
+								EpisodeFinished = true;	
+							}							
+						}
+						
+						
+					}
+					
+					//player.activeTasks.re
+					foreach(TaskNode tn in deleted)
+					{
+						player.activeTasks.Remove(tn);
+					}
+					
 					AdvanceScript ();
+					
+					
 				}
 			}
 		}
+		
 
 		/// <summary>
 		/// Advances the script.  Not my most helpful comment ever.
@@ -200,20 +231,20 @@ namespace StoryEngine
 				//this.CurrentTask = next;
 				//this.CurrentTask.Actor.ActiveTask = next;
 				List<TaskNode> active = player.activeTasks;
-				if(active == null) active = new List<TaskNode>();
+				
 				WorldGUI wgui = Globals.Instance.WorldGUI;
 				
 				String text = "";
 				bool show = false;
-				if (!active.Contains (node)) {
-					active.Add (node);					
-					active = active.Select (n => !n.done) as List<TaskNode>;
-					player.activeTasks = active;
+				if (player.activeTasks != null && !player.activeTasks.Contains (node)) {												
+					player.activeTasks.Add(node);
 					Dialogue d = node.data.PreDialogue;
 					wgui.Dialogues.Add (d);
 					show = true;
 					Debug.Log ("activated task: " + node.data.Type + ", " + node.data.Description);
 				}
+				
+				
 				
 				wgui.DisplayDialogue = show;				
 

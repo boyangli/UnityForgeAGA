@@ -320,7 +320,7 @@
       <Variables>
         <Variable>
           <Name>character1</Name>
-          <Value>jester</Value>
+          <Value>player</Value>
         </Variable>
         <Variable>
           <Name>locationFrom</Name>

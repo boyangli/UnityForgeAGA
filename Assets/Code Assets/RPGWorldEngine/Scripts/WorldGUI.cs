@@ -69,7 +69,7 @@ public class WorldGUI : MonoBehaviour
 	/// <summary>
 	/// The current Dialogue to display.
 	/// </summary>
-	public List<Dialogue> Dialogues;
+	public List<Dialogue> Dialogues {get; set;}
 	/// <summary>
 	/// One-frame buffer for DisplayDialog bool, as OnGUI() is called faster than Update().
 	/// </summary>
@@ -722,7 +722,7 @@ public class WorldGUI : MonoBehaviour
 		GUILayout.EndVertical ();
 		        
 		if (this.selectedActorInventoryItem != -1) {
-			print ("Selected Actor " + this.selectedActorInventoryItem);
+			//print ("Selected Actor " + this.selectedActorInventoryItem);
 			this.displayActorInventory = false;
 		}
 	}

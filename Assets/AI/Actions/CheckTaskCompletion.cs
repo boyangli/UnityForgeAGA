@@ -33,8 +33,8 @@ public class CheckTaskCompletion : Action {
 
         //Check if the player has acted yet.
 //        if (this.controller.Acted) 
-			return ActionResult.SUCCESS;
-//        return ActionResult.RUNNING;
+			//return ActionResult.SUCCESS;
+        return ActionResult.RUNNING;
     }
 
     public override ActionResult Stop(Agent agent, float deltaTime) {
