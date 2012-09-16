@@ -347,6 +347,10 @@ namespace StoryEngine
 			//If the item is supposed to be given or used, make sure the actor has it.
 			if ((task.Type == "deliver" || task.Type == "kill-by-item" || task.Type == "revive-by-item") &&
                 !task.Actor.Inventory.Contains (task.Item)) {
+				if (task.Item == null)
+				{
+					Debug.LogError ("There is no item specified for action #" + task.ID + ": " + task.Type);
+				}
 				Debug.LogWarning (task.Actor.name + " does not own " + task.Item.Name + " to execute " + task.Type + ".  Repairing.");
 				//Figure out if it needs to be picked up or traded.
 				if (task.Item.Owner.GetComponent<ItemScript> () != null)

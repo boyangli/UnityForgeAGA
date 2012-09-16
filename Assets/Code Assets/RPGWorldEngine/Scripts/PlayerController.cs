@@ -218,16 +218,14 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 		}
-		
-		if (this.activeTasks != null) {
-			//Check for completion of GoTo tasks each frame.
-			foreach (TaskNode tn in this.activeTasks) {
-				Task task = tn.data;
-				if (task.Type.Equals ("goto") && task.Actor.Locale == task.Locale && !tn.done) {
-					TaskDone (tn);
-				}
+				
+		foreach (TaskNode tn in this.activeTasks) {
+			Task task = tn.data;
+			if (task.Type.Equals ("goto") && task.Actor.Locale == task.Locale && !tn.done) {
+				TaskDone (tn);
 			}
 		}
+		
 
 	}
 	

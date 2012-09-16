@@ -163,7 +163,7 @@
     </StoryEvent> 
     <StoryEvent>
       <ID>3</ID>
-      <Name>loot-item</Name>
+      <Name>loot</Name>
       <Description>Loot {item} from {character2}.</Description>
       <Variables>
         <Variable>
@@ -221,7 +221,7 @@
     </StoryEvent>
     <StoryEvent>
       <ID>5</ID>
-      <Name>kill_with_item</Name>
+      <Name>kill-by-item</Name>
       <Description>Challenge the {character2}.</Description>
       <Variables>
         <Variable>
@@ -235,10 +235,14 @@
         <Variable>
           <Name>location</Name>
           <Value>jail</Value>
+        </Variable>	
+		<Variable>
+          <Name>item</Name>
+          <Value>sword</Value>
         </Variable>		
 		<Variable>
           <Name>dialogPre</Name>
-          <Value>{character2} I'm not afraid. I should go kill the guard.</Value>
+          <Value>{character1} I'm not afraid. I should go kill the guard.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
@@ -283,7 +287,7 @@
     </StoryEvent>
 	<StoryEvent>
       <ID>7</ID>
-      <Name>revive_with_item</Name>
+      <Name>revive-by-item</Name>
       <Description>revive {character2}.</Description>
       <Variables>
         <Variable>
@@ -297,6 +301,10 @@
         <Variable>
           <Name>location</Name>
           <Value>sam_house</Value>
+        </Variable>
+		<Variable>
+          <Name>item</Name>
+          <Value>health_potion</Value>
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
