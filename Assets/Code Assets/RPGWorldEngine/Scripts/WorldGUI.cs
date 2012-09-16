@@ -779,7 +779,7 @@ public class WorldGUI : MonoBehaviour
 		GUILayout.EndVertical ();
 		        
 		if (this.selectedActeeInventoryItem != -1) {
-			print ("Selected Actee " + this.selectedActeeInventoryItem);
+			//print ("Selected Actee " + this.selectedActeeInventoryItem);
 			this.displayActeeInventory = false;
 		}
 	}

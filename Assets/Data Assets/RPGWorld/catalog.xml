@@ -3,15 +3,15 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Items>
     <Item>
-      <Name>Heart of Ice</Name>
-      <Description>This deep blue gem is chill to the touch.</Description>
+      <Name>Health Potion</Name>
+      <Description>This vial of gently-glowing, blue liquid is capable of reviving anyone.</Description>
     </Item>
     <Item>
-      <Name>Mallet</Name>
-      <Description>A solid iron tool, useful for any number of things.</Description>
+      <Name>Sword</Name>
+      <Description>A trusty sword, an adventurer's loyal companion.</Description>
     </Item>
     <Item>
-      <Name>Necronomicon</Name>
+      <Name>Book of Voodoo</Name>
       <Description>A cracked, leather-bound book of black magicks and incantations.</Description>
     </Item>
   </Items>
