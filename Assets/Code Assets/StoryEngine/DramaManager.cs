@@ -227,8 +227,7 @@ namespace StoryEngine
 				this.EmergencyRepair (node.data);
 				//this.CurrentTask = next;
 				//this.CurrentTask.Actor.ActiveTask = next;
-				List<TaskNode> active = player.activeTasks;
-				//TODO Add code to block actions that interfere
+				//List<TaskNode> active = player.activeTasks;
 				
 //				String text = "";
 				
@@ -236,7 +235,7 @@ namespace StoryEngine
 					player.activeTasks.Add(node);
 					Dialogue d = node.data.PreDialogue;
 					
-					if(!d.Line.Trim().Equals(""))
+					if(!(d.Line.Trim() == ""))
 					{
 						wgui.Dialogues.Add (d);
 						show = true;
@@ -247,7 +246,59 @@ namespace StoryEngine
 			}
 			wgui.DisplayDialogue = show;				
 		}
-        
+		
+		/// <summary>
+		/// Gets the current banned actions.
+		/// </summary>
+		/// <returns>
+		/// The current banned actions.
+		/// </returns>
+		public List<TaskNode> getCurrentBannedActions(PlayerController player)
+		{
+			List<TaskNode> FutureTaskNodes = new List<TaskNode>();
+			
+			if (player == null)
+					return FutureTaskNodes;
+			
+			List<TaskNode> active = player.activeTasks;
+			List<TaskNode> visited = new List<TaskNode>();
+			List<TaskNode> fringe = new List<TaskNode>();
+			
+			foreach (TaskNode a in active)
+			{
+				visited.Add(a);
+				foreach (TaskNode child in a.children)
+				{
+					if(!visited.Contains(child) && !fringe.Contains(child))
+					{
+						fringe.Add(child);
+					}
+				}
+			}
+			
+			while(fringe.Count > 0)
+			{
+				TaskNode current = fringe[0];
+				
+				if(visited.Contains(current))
+				{
+					fringe.RemoveAt(0);
+					continue;
+				}
+				
+				fringe.AddRange(current.children);
+				
+				if(!FutureTaskNodes.Contains(current))
+				{
+					FutureTaskNodes.Add(current);
+				}
+				
+				visited.Add(current);
+				fringe.RemoveAt(0);
+			}
+			
+			return FutureTaskNodes;
+		}
 
 		/// <summary>
 		/// Initializes the world, enforcing all Propositions in the Episode's
@@ -287,7 +338,7 @@ namespace StoryEngine
 				this.World.PickupItem (cs, item);
 			}
 		}
-
+		
 		/// <summary>
 		/// Validates a given task, forcing any open preconditions.  In theory,
 		/// nothing should ever happen within this method - but just in case.

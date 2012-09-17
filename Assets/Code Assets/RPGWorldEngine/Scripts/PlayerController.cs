@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
 				
 		foreach (TaskNode tn in this.activeTasks) {
 			Task task = tn.data;
-			if (task.Type.Equals ("goto") && task.Actor.Locale == task.Locale && !tn.done) {
+			if (task.Type == "goto" && task.Actor.Locale == task.Locale && !tn.done) {
 				TaskDone (tn);
 			}
 		}
@@ -324,6 +324,21 @@ public class PlayerController : MonoBehaviour
 			selectedActeeItem = this.NonContextActee.Inventory [Globals.Instance.WorldGUI.selectedActeeInventoryItem - 1];
 		}
 		
+		//Prevent doing quests before they become accessible.
+		List<TaskNode> tnList = Globals.Instance.DMScript.DramaManager.getCurrentBannedActions(this);
+		
+		foreach(TaskNode tn in tnList)
+		{
+			if(selectedAction == tn.data.Type && NonContextActor == tn.data.Actor)
+			{
+				if((tn.data.Type == "pickup" && selectedActorItem.Name == NonContextItem.Name) || NonContextActee == tn.data.Actee)
+				{
+					selectedAction = "cancel";
+					break;
+				}
+			}
+		}
+		
 		//Debug.Log("Task Description: " + this.Context.Description);
 
 		//Get the chracter script or item script that was clicked on. 
@@ -335,7 +350,7 @@ public class PlayerController : MonoBehaviour
 			Globals.Instance.WorldScript.PickupItem (NonContextActor, this.NonContextItem.Item);
 			foreach(TaskNode tn in activeTasks)
 			{
-				if (tn.data.Type.Equals ("pickup") && tn.data.Item == this.NonContextItem.Item)
+				if (tn.data.Type == "pickup" && tn.data.Item == this.NonContextItem.Item)
 					TaskDone(tn);
 			}
 		
@@ -396,7 +411,7 @@ public class PlayerController : MonoBehaviour
 			//If we've done the right thing here.
 			foreach(TaskNode tn in this.activeTasks)
 			{
-				if (this.NonContextActee == tn.data.Actee && tn.data.Type.Equals (selectedAction) && !correctItemNotSelected)
+				if (this.NonContextActee == tn.data.Actee && tn.data.Type == selectedAction && !correctItemNotSelected)
 					TaskDone(tn);
 			}			
 

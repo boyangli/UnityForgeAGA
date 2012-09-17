@@ -665,8 +665,8 @@ public class WorldGUI : MonoBehaviour
 
 		GUILayout.EndVertical ();        
 		if (this.selectedAction != -1) {
-			print ("Selected Action " + this.selectedAction);
-			//this.displayActionOptions = false;
+			//print ("Selected Action " + this.selectedAction);
+			this.displayActionOptions = false;
 		}
 	}
 	

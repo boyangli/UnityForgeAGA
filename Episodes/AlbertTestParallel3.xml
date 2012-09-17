@@ -67,7 +67,7 @@
       <Proposition>
         <Variables>
           <Variable><Name>noun</Name><Value>player</Value></Variable>
-          <Variable><Name>location</Name><Value>atariville</Value></Variable>
+          <Variable><Name>location</Name><Value>player_start</Value></Variable>
         </Variables>
       </Proposition>
       <Proposition>
@@ -114,7 +114,7 @@
         </Variable>
         <Variable>
           <Name>locationFrom</Name>
-          <Value>atariville</Value>
+          <Value>player_start</Value>
         </Variable>
         <Variable>
           <Name>locationTo</Name>
