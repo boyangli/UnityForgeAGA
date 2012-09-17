@@ -5,7 +5,7 @@
       <Proposition>
         <Variables>
           <Variable><Name>character</Name><Value>uncle_sam</Value></Variable>
-          <Variable><Name>health</Name><Value>dying</Value></Variable>
+          <Variable><Name>health</Name><Value>dead</Value></Variable>
         </Variables>
       </Proposition>
       <Proposition>
@@ -99,35 +99,70 @@
     </Possessions>
   </InitialState>
   <Events>
-    <StoryEvent>
+	<StoryEvent>
       <ID>1</ID>
-      <Name>talk</Name>
-      <Description>Talk to {character2} at {location}.</Description>
+      <Name>goto</Name>
+      <Description>Travel to {locationTo}.</Description>
       <Variables>
         <Variable>
           <Name>character1</Name>
           <Value>player</Value>
         </Variable>
-        <Variable>
+		<Variable>
           <Name>character2</Name>
           <Value>uncle_sam</Value>
         </Variable>
         <Variable>
-          <Name>location</Name>
+          <Name>locationFrom</Name>
+          <Value>atariville</Value>
+        </Variable>
+        <Variable>
+          <Name>locationTo</Name>
           <Value>sam_house</Value>
-        </Variable>                
+        </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value>{character1} I should go see {character2} at {location}. I have not seen him for a while.</Value>
+          <Value>{character1} I should go see {character2} at {locationTo}. He lives so far away. I have not seen him for a while.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character2} The thief stabbed me and took my book. It's the Book of Voodoo. I am going to die. </Value>
+          <Value>{character1} Oh no! {locationTo} has been broken into! {character2}'s books are all lying in a mess. Did someone break in just to steal a book?</Value>
+        </Variable>
+      </Variables>
+    </StoryEvent>
+    <StoryEvent>
+      <ID>2</ID>
+      <Name>goto</Name>
+      <Description>Travel to {locationTo}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>
+		<Variable>
+          <Name>character2</Name>
+          <Value>uncle_sam</Value>
+        </Variable>
+        <Variable>
+          <Name>locationFrom</Name>
+          <Value>sam_house</Value>
+        </Variable>
+        <Variable>
+          <Name>locationTo</Name>
+          <Value>sam_house</Value>
+        </Variable>
+        <Variable>
+          <Name>dialogPre</Name>
+          <Value></Value>
+        </Variable>
+        <Variable>
+          <Name>dialogPost</Name>
+          <Value>{character1} Oh no! {character2} is lying in a pool of blood! He's been stabbed to death! Whoever did this to him will pay with their life! But maybe, just maybe, I can find someone to help me revive him? Whatever it is I should act fast!</Value>
         </Variable>
       </Variables>
     </StoryEvent>
 	<StoryEvent>
-      <ID>2</ID>
+      <ID>3</ID>
       <Name>kill-by-item</Name>
       <Description>Kill {character2}.</Description>
       <Variables>
@@ -153,16 +188,16 @@
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value>{character1}Must! Kill! {character2}.</Value>
+          <Value>{character1} I must kill the {character2} whoever it is! Maybe I should search the shady dive bar at the edge of town.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character2} Don't mess with the wrong people... ahhh... I die. </Value>
+          <Value>{character2} Ah! I only wanted to be rich and famous with the help of this book... ahhh... X-X </Value>
         </Variable>
       </Variables>
     </StoryEvent> 
     <StoryEvent>
-      <ID>3</ID>
+      <ID>4</ID>
       <Name>loot</Name>
       <Description>Loot {item} from {character2}.</Description>
       <Variables>
@@ -175,6 +210,10 @@
           <Value>thief</Value>
         </Variable>
 		<Variable>
+          <Name>character3</Name>
+          <Value>uncle_sam</Value>
+        </Variable>
+		<Variable>
           <Name>item</Name>
           <Value>book_of_voodoo</Value>
         </Variable>
@@ -184,7 +223,7 @@
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value>{character1} Search the body of {character2} for the {item}.</Value>
+          <Value>{character1} The {item} belongs to my {character3}. I must search the body of {character2} for the {item} and loot it back.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
@@ -193,7 +232,7 @@
       </Variables>
     </StoryEvent> 
     <StoryEvent>
-      <ID>4</ID>
+      <ID>5</ID>
       <Name>talk</Name>
       <Description>Talk to {character2}.</Description>
       <Variables>
@@ -205,22 +244,34 @@
           <Name>character2</Name>
           <Value>old_man</Value>
         </Variable>
+		<Variable>
+          <Name>character3</Name>
+          <Value>uncle_sam</Value>
+        </Variable>
+		<Variable>
+          <Name>character4</Name>
+          <Value>witch</Value>
+        </Variable>
+		<Variable>
+          <Name>character5</Name>
+          <Value>guard</Value>
+        </Variable>
         <Variable>
           <Name>location</Name>
           <Value>atariville</Value>
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value></Value>
+          <Value>{character1} Hmmmm... maybe someone in town can tell me how to revive my {character3}.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character2} There is a powerful witch who can save your uncle. But she is put to jail by the king. There is no way you can beat the jail guard. Just impossible.</Value>
+          <Value>{character2} I am moved by your tale. There is a powerful {character4} who can save your {character3}. But she was put in jail by the king. There is no way you can beat the jail {character5}. Just impossible. Also, she will need some payment. She usually accepts spell books and items of power.</Value>
         </Variable>
       </Variables>
     </StoryEvent>
     <StoryEvent>
-      <ID>5</ID>
+      <ID>6</ID>
       <Name>kill-by-item</Name>
       <Description>Challenge the {character2}.</Description>
       <Variables>
@@ -246,12 +297,43 @@
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character2} I have never seen someone... so... power...ful..... </Value>
+          <Value>{character2} I have never seen someone... so... power...ful..... Ahhhh! X_X </Value>
         </Variable>
       </Variables>
-    </StoryEvent> 
+    </StoryEvent>
 	<StoryEvent>
-      <ID>6</ID>
+      <ID>7</ID>
+      <Name>talk</Name>
+      <Description>Talk to {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>
+        <Variable>
+          <Name>character2</Name>
+          <Value>witch</Value>
+        </Variable>
+		<Variable>
+          <Name>character3</Name>
+          <Value>uncle_sam</Value>
+        </Variable>
+        <Variable>
+          <Name>location</Name>
+          <Value>jail</Value>
+        </Variable>
+        <Variable>
+          <Name>dialogPre</Name>
+          <Value>{character1} There is the {character2}. Maybe if I talk to her she will help me revive {character3}</Value>
+        </Variable>
+        <Variable>
+          <Name>dialogPost</Name>
+          <Value>{character2} I am moved by your tale. I was put in jail by the king. Thank you for rescuing me. However, mere gratitude will not be enough for me to revive your uncle. I have a potion that can revive you uncle, but I will need some payment. I usually accept spell books and items of power. Do we have a trade?</Value>
+        </Variable>
+      </Variables>
+    </StoryEvent>
+	<StoryEvent>
+      <ID>8</ID>
       <Name>trade</Name>
       <Description>Trade with {character2}.</Description>
       <Variables>
@@ -277,16 +359,16 @@
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value>{character1} I should trade with the witch.</Value>
+          <Value>{character1} I have the {item1}. I should trade with the witch for the {item2}.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character1} Now I can save my uncle.</Value>
+          <Value>{character1} Yay! I have the {item2}! Now I can save my uncle. Let me hurry!</Value>
         </Variable>
       </Variables>
     </StoryEvent>
 	<StoryEvent>
-      <ID>7</ID>
+      <ID>9</ID>
       <Name>revive-by-item</Name>
       <Description>revive {character2}.</Description>
       <Variables>
@@ -308,11 +390,11 @@
         </Variable>
         <Variable>
           <Name>dialogPre</Name>
-          <Value>{character1} Now save my uncle.</Value>
+          <Value>{character1} Let me rush to {location} and revive my {character2} using this {item}.</Value>
         </Variable>
         <Variable>
           <Name>dialogPost</Name>
-          <Value>{character2} Thank you. You are a real hero.</Value>
+          <Value>{character2} Thank you so much nephew. You are a real hero. May the force be with you.</Value>
         </Variable>
       </Variables>
     </StoryEvent> 	
@@ -327,11 +409,11 @@
 		<Target>3</Target>		
 	</Link>
 	<Link> 
-		<Source>1</Source>
+		<Source>3</Source>
 		<Target>4</Target>		
 	</Link>
 	<Link> 
-		<Source>4</Source>
+		<Source>2</Source>
 		<Target>5</Target>		
 	</Link>
 	<Link> 
@@ -339,12 +421,24 @@
 		<Target>6</Target>		
 	</Link>
 	<Link> 
-		<Source>3</Source>
-		<Target>6</Target>		
-	</Link>
-	<Link> 
 		<Source>6</Source>
 		<Target>7</Target>		
+	</Link>
+	<Link> 
+		<Source>7</Source>
+		<Target>8</Target>		
+	</Link>
+	<Link> 
+		<Source>4</Source>
+		<Target>8</Target>		
+	</Link>
+	<Link> 
+		<Source>7</Source>
+		<Target>8</Target>		
+	</Link>
+	<Link> 
+		<Source>8</Source>
+		<Target>9</Target>		
 	</Link>
   </Links>
 </Episode>

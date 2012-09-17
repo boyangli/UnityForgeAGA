@@ -31,7 +31,7 @@ public class SayPreDialogue : Action
 	public override ActionResult Execute(Agent agent, float deltaTime)
 	{
 		//Get the gui script and check for dialogue close.
-        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
+//        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
 
 //        if (task.PreDialogue.Spoken)
 			return ActionResult.SUCCESS;

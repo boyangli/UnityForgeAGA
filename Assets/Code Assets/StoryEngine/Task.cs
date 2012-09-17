@@ -123,13 +123,13 @@ namespace StoryEngine {
             }
 
             this.Description = this.ParseDescription(ev.Description);
-            this.PreDialogue = this.ParseDialogue(ev.GetValue("dialogPre"));
-            this.PostDialogue = this.ParseDialogue(ev.GetValue("dialogPost"));
+            this.PreDialogue = this.ParseDialogue(ev.GetValue("dialogPre"), ev);
+            this.PostDialogue = this.ParseDialogue(ev.GetValue("dialogPost"), ev);
 
             this.StoryEvent = ev;
         }
 
-        private Dialogue ParseDialogue(string rawDialogue) {
+        private Dialogue ParseDialogue(string rawDialogue, StoryEvent ev) {
             //<Variable>
             //    <Name>dialogPre</Name>
             //    <Value>"{character1}I think I'll should give this {item} to {character2}."</Value>
@@ -159,6 +159,14 @@ namespace StoryEngine {
 			//workingStr = workingStr.Replace( "{locationFrom}", this.Actor.name );
 			rawDialogue = rawDialogue.Replace( "{location}", this.Locale.name );
 			
+			WorldScript ws = Globals.Instance.WorldScript;
+			
+			if (ws.GetLocaleByName(ev.GetValue("locationFrom")) != null) rawDialogue = rawDialogue.Replace( "{locationFrom}", ws.GetLocaleByName(ev.GetValue("locationFrom")).name );
+			if (ws.GetCharacterByName(ev.GetValue("character3")) != null) rawDialogue = rawDialogue.Replace( "{character3}", ws.GetCharacterByName(ev.GetValue("character3")).Name );
+			if (ws.GetCharacterByName(ev.GetValue("character4")) != null) rawDialogue = rawDialogue.Replace( "{character4}", ws.GetCharacterByName(ev.GetValue("character4")).Name );
+			if (ws.GetCharacterByName(ev.GetValue("character5")) != null) rawDialogue = rawDialogue.Replace( "{character5}", ws.GetCharacterByName(ev.GetValue("character5")).Name );
+			if (ws.GetItemByName(ev.GetValue("item1")) != null) rawDialogue = rawDialogue.Replace( "{item1}", ws.GetItemByName(ev.GetValue("item1")).Name );
+			if (ws.GetItemByName(ev.GetValue("item2")) != null) rawDialogue = rawDialogue.Replace( "{item2}", ws.GetItemByName(ev.GetValue("item2")).Name );
 			
             return new Dialogue(theActor, rawDialogue);
         }
@@ -170,7 +178,6 @@ namespace StoryEngine {
             rawDescription = rawDescription.Replace("{locationTo}", this.Locale.name);
             //workingStr = workingStr.Replace( "{locationFrom}", this.Actor.name );
             rawDescription = rawDescription.Replace("{location}", this.Locale.name);
-
 
             return rawDescription;
         }

@@ -52,11 +52,6 @@ namespace StoryEngine
 		public bool EpisodeFinished { get; set; }
 
 		/// <summary>
-		/// Index of the current task.
-		/// </summary>
-		private int currentIndex = -1;
-
-		/// <summary>
 		/// Creates a drama manager for a given world.
 		/// </summary>
 		/// <param name="world">The world in which the story should occur.</param>
@@ -233,8 +228,9 @@ namespace StoryEngine
 				//this.CurrentTask = next;
 				//this.CurrentTask.Actor.ActiveTask = next;
 				List<TaskNode> active = player.activeTasks;
+				//TODO Add code to block actions that interfere
 				
-				String text = "";
+//				String text = "";
 				
 				if (player.activeTasks != null && !player.activeTasks.Contains (node)) {												
 					player.activeTasks.Add(node);
@@ -334,7 +330,7 @@ namespace StoryEngine
 				}
 			}
 			//If the item is supposed to be taken, make sure the actee has it.
-			if ((task.Type == "collect" || task.Type == "steal" || task.Type == "loot-corpse") &&
+			if ((task.Type == "collect" || task.Type == "steal" || task.Type == "loot") &&
                 !task.Actee.Inventory.Contains (task.Item)) {
 				Debug.LogWarning (task.Actee.name + " does not own " + task.Item.Name + " to execute " + task.Type + ".  Repairing.");
 				//Figure out if it needs to be picked up or traded.

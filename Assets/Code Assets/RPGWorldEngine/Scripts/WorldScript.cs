@@ -287,7 +287,7 @@ public class WorldScript : MonoBehaviour {
 
         //Collect the information from the task.
         List<string> enemyNames = new List<string>();
-        string enemy = null;
+//        string enemy = null;
 
 //        //There's a 'hard' coded set of 4 enemies in stuff handed over by the ScenGen.
 //        enemy = task.StoryEvent.GetValue("enemy1");

@@ -21,7 +21,7 @@ public class CheckTaskCompletion : Action {
     public override ActionResult Start(Agent agent, float deltaTime) {
 //        //Get the current task and assign it to the player controller.
 //        Task task = this.actionContext.GetContextItem<CharacterScript>("character").ActiveTask;
-        this.controller = this.actionContext.GetContextItem<PlayerController>("controller");
+//        this.controller = this.actionContext.GetContextItem<PlayerController>("controller");
 //        this.controller.Context = task;
 
         return ActionResult.SUCCESS;

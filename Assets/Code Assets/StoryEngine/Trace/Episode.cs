@@ -4,8 +4,6 @@ using System.Xml.Serialization;
 using System.Collections;
 using UnityEngine;
 
-using UnityEngine;
-
 namespace StoryEngine.Trace {
     /// <summary>
     /// The containing class representing a complete episode story trace.
