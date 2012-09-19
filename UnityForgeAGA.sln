@@ -30,10 +30,14 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 <<<<<<< HEAD
+<<<<<<< HEAD
 																												GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																						GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> Added Improved Script And Dialogue Parsing Templates
+=======
+																																					GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Title Screen, Prettier Graphics
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
