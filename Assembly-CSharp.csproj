@@ -1,274 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{257FF719-16BF-5B1B-9A3B-7FDF12C70BBC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AssemblyCSharp</RootNamespace>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{257FF719-16BF-5B1B-9A3B-7FDF12C70BBC}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_OSX;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_OSX;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Temp\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>..\..\..\..\..\..\..\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="RAINOne">
-      <HintPath>Assets\RAIN\RAINOne.dll</HintPath>
-    </Reference>
-    <Reference Include="Recast">
-      <HintPath>Assets\RAIN\Recast.dll</HintPath>
-    </Reference>
+	<Reference Include="System" />
+    <Reference Include="System.XML" />
+	<Reference Include="System.Core" />
+	<Reference Include="UnityEngine">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="Assets\AI\Actions\CheckTaskCompletion.cs" />
-    <Compile Include="Assets\AI\Actions\Combat.cs" />
-    <Compile Include="Assets\AI\Actions\CompleteTask.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskCollectStealLoot.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskCombat.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskDeliver.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskExists.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskGoTo.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskKillRevive.cs" />
-    <Compile Include="Assets\AI\Actions\ConditionalTaskPickup.cs" />
-    <Compile Include="Assets\AI\Actions\ItemGive.cs" />
-    <Compile Include="Assets\AI\Actions\ItemPickup.cs" />
-    <Compile Include="Assets\AI\Actions\ItemTake.cs" />
-    <Compile Include="Assets\AI\Actions\KillRevive.cs" />
-    <Compile Include="Assets\AI\Actions\SayPostDialogue.cs" />
-    <Compile Include="Assets\AI\Actions\SayPreDialogue.cs" />
-    <Compile Include="Assets\AI\Actions\SetMoveActee.cs" />
-    <Compile Include="Assets\AI\Actions\SetMoveItem.cs" />
-    <Compile Include="Assets\AI\Actions\Teleport.cs" />
-    <Compile Include="Assets\AI\Actions\Wander.cs" />
-    <Compile Include="Assets\AI\Scripts\MagicAgentActivater.cs" />
-    <Compile Include="Assets\AI\Scripts\PlayerActivater.cs" />
-    <Compile Include="Assets\Code Assets\Common\FollowCam.cs" />
-    <Compile Include="Assets\Code Assets\Common\MouseCollisionTest.cs" />
-    <Compile Include="Assets\Code Assets\Common\SpriteProjector.cs" />
-    <Compile Include="Assets\Code Assets\Common\Steering\MouseSteerer.cs" />
-    <Compile Include="Assets\Code Assets\Common\Steering\Steerer.cs" />
-    <Compile Include="Assets\Code Assets\Comms\Communicator.cs" />
-    <Compile Include="Assets\Code Assets\Comms\Message.cs" />
-    <Compile Include="Assets\Code Assets\DataOutput\OutputAction.cs" />
-    <Compile Include="Assets\Code Assets\DataOutput\OutputData.cs" />
-    <Compile Include="Assets\Code Assets\DataOutput\OutputSurvey.cs" />
-    <Compile Include="Assets\Code Assets\Platformer\PlatformerController.cs" />
-    <Compile Include="Assets\Code Assets\Poly\Prism.cs" />
-    <Compile Include="Assets\Code Assets\Poly\PrismGenerator.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Battle.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\BattleReport.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Creatures\Bestiary.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Creatures\Creature.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Creatures\CreaturePrototype.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Powers\DamageReport.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Powers\Element.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Powers\Power.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Powers\PowerBook.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scenario.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scripts\AnimatedCreature.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scripts\BattleGUI.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scripts\BattleScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scripts\CombatScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGBattleEngine\Scripts\ScenarioScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Characters\CharacterScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Globals.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Items\Catalog.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Items\Item.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Items\ItemScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\LocaleScript.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\WorldGUI.cs" />
-    <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\WorldScript.cs" />
-    <Compile Include="Assets\Code Assets\StateSpace\BattleState.cs" />
-    <Compile Include="Assets\Code Assets\StateSpace\CreatureState.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Dialogue.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\DramaManager.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\DramaManagerScript.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Task.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\TaskNode.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\Episode.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\InitialState.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\Link.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\Proposition.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\StoryEvent.cs" />
-    <Compile Include="Assets\Code Assets\StoryEngine\Trace\Variable.cs" />
-    <Compile Include="Assets\Orthello\Examples\1 - Paralax scrolling FilledSprite\CExample1.cs" />
-    <Compile Include="Assets\Orthello\Examples\2 - Moving collidable sprites\CBlock2.cs" />
-    <Compile Include="Assets\Orthello\Examples\2 - Moving collidable sprites\CExample2.cs" />
-    <Compile Include="Assets\Orthello\Examples\2 - Moving collidable sprites\CStar2.cs" />
-    <Compile Include="Assets\Orthello\Examples\3 - Shooting Asteroids\CAsteroid3.cs" />
-    <Compile Include="Assets\Orthello\Examples\3 - Shooting Asteroids\CBullet3.cs" />
-    <Compile Include="Assets\Orthello\Examples\3 - Shooting Asteroids\CExample3.cs" />
-    <Compile Include="Assets\Orthello\Examples\4 - Follow Target View\CExample4.cs" />
-    <Compile Include="Assets\Orthello\Examples\4 - Follow Target View\CMover4.cs" />
-    <Compile Include="Assets\Orthello\Examples\5 - Creating At Runtime\CExample5.cs" />
-    <Compile Include="Assets\Orthello\Examples\6 - Physics\CExample6.cs" />
-    <Compile Include="Assets\Orthello\Examples\7 - Tweening\CExample7.cs" />
-    <Compile Include="Assets\Orthello\Examples\7 - Tweening\CStar7_1.cs" />
-    <Compile Include="Assets\Orthello\Examples\7 - Tweening\CStar7_2.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\OTView.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTAtlasData.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlas.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlasCocos2D.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlasImport.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlasImportXML.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlasOGRE.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\Atlas\OTSpriteAtlasSparrow.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTAnimatingSprite.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTAnimation.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTAnimationFrameset.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTContainer.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTFilledSprite.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTSprite.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Graphics\Sprites\OTSpriteSheet.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEase.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBackIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBackInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBackOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBounceIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBounceInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseBounceOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCircIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCircInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCircOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCubicIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCubicInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseCubicOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseElasticIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseElasticInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseElasticOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseExpoIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseExpoInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseExpoOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseLinear.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuadIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuadInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuadOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuartIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuartInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuartOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuintIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuintInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseQuintOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseSineIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseSineInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseSineOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseStrongIn.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseStrongInOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEaseStrongOut.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTEasing.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTTween.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\Tweening\OTTweenController.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OT.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTController.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTMatRef.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTObject.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTObjectType.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTPB.cs" />
-    <Compile Include="Assets\Orthello\Standard Assets\OT\_Base\OTTimeCycle.cs" />
-    <Compile Include="Assets\RAIN\Scripts\MixamoAIAnimationExtender.cs" />
-    <None Include="Assets\Data Assets\Resources\Episodes\006_genEp96303.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\alchemist.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\015_genEp96144.xml" />
-    <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\005_genEp96316.xml" />
-    <None Include="Assets\AI\Resources\BehaviorTrees\MagicAgentBT.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\008_genEp96301.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\giantspider.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\freezer.xml" />
-    <None Include="Assets\Data Assets\RPGWorld\bestiary.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\Story1.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\blazer.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\016_genEp96143.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\cobaltmineral.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\017_genEp96142.xml" />
-    <None Include="Assets\RAIN\releasenotes.txt" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\skeleton.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\022_genEp96093.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\018_genEp96120.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\snowier.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\002_genEp96383.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\001_genEp96384.xml" />
-    <None Include="Assets\Data Assets\RPGBattle\shortScenario.xml" />
-    <None Include="Assets\Data Assets\RPGBattle\scenario.xml" />
-    <None Include="Assets\Orthello\Examples\4 - Follow Target View\-orthello-config.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\female2.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\019_genEp96118.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\021_genEp96116.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\redHead.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\003_genEp96382.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\aquaelemental.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\windghost.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\male2.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\ungoliant.xml" />
-    <None Include="Assets\Orthello\-Read-Me.txt" />
-    <None Include="Assets\Data Assets\Resources\Episodes\024_genEp96060.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\000_genEp96390.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\020_genEp96117.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\rsx.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\darklord.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\plasma.xml" />
-    <None Include="Assets\Necromancer GUI\Kingthings.txt" />
-    <None Include="Assets\Data Assets\Resources\Episodes\023_genEp96092.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\009_genEp96276.xml" />
-    <None Include="Assets\Data Assets\RPGWorld\catalog.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\007_genEp96302.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\imp.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\sropho.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\bradiumgolem.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\gazeti.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\stapo.xml" />
-    <None Include="Assets\Necromancer GUI\Readme.txt" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\male1.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\004_genEp96317.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\ogretooth.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\012_genEp96175.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\salamander.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\010_genEp96213.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\aliot.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\andre.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\cloudHermit.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\female1.xml" />
-    <None Include="Assets\AI\Resources\BehaviorTrees\PlayerBT.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\pouring.xml" />
-    <None Include="Assets\Data Assets\RPGWorld\powerbook.xml" />
-    <None Include="Assets\Orthello\Standard Assets\OT\_Base\TintedAlpha.shader" />
-    <None Include="Assets\Data Assets\Resources\Episodes\013_genEp96147.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\011_genEp96211.xml" />
-    <None Include="Assets\Data Assets\Resources\Episodes\014_genEp96145.xml" />
-    <None Include="Assets\Art Assets\Sprites\RPGBattle\toad.xml" />
-=======
      <Compile Include="Assets\AI\Actions\CheckTaskCompletion.cs" />
      <Compile Include="Assets\AI\Actions\Combat.cs" />
      <Compile Include="Assets\AI\Actions\CompleteTask.cs" />
@@ -495,7 +270,6 @@
  <Reference Include="Assets\RAIN\Recast">
  <HintPath>Assets\RAIN\Recast.dll</HintPath>
  </Reference>
->>>>>>> Title Screen, Prettier Graphics
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -505,4 +279,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>
