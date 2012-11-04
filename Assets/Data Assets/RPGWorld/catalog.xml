@@ -14,5 +14,9 @@
       <Name>Book of Voodoo</Name>
       <Description>A cracked, leather-bound book of black magicks and incantations.</Description>
     </Item>
+	<Item>
+      <Name>Random Item</Name>
+      <Description>A random item from twitter.</Description>
+    </Item>
   </Items>
 </Catalog>

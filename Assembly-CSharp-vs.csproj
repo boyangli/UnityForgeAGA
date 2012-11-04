@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_5;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_6;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -101,6 +101,7 @@
      <Compile Include="Assets\Code Assets\RPGWorldEngine\Items\ItemScript.cs" />
      <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\LocaleScript.cs" />
      <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\TwitterLoader.cs" />
      <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\WorldGUI.cs" />
      <Compile Include="Assets\Code Assets\RPGWorldEngine\Scripts\WorldScript.cs" />
      <Compile Include="Assets\Code Assets\StateSpace\BattleState.cs" />
@@ -110,11 +111,16 @@
      <Compile Include="Assets\Code Assets\StoryEngine\DramaManagerScript.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Task.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\TaskNode.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\Trace\Character.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Episode.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\InitialState.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Link.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\Trace\PropObject.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Proposition.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\Trace\Relationship.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\StoryEvent.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\Trace\TestGUI.cs" />
+     <Compile Include="Assets\Code Assets\StoryEngine\Trace\TwitterData.cs" />
      <Compile Include="Assets\Code Assets\StoryEngine\Trace\Variable.cs" />
      <Compile Include="Assets\Orthello\Examples\1 - Paralax scrolling FilledSprite\CExample1.cs" />
      <Compile Include="Assets\Orthello\Examples\2 - Moving collidable sprites\CBlock2.cs" />

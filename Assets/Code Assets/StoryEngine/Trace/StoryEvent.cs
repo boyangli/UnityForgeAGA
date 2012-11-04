@@ -9,20 +9,20 @@ namespace StoryEngine.Trace {
         /// <summary>
         /// The unique idenifying integer for this event.
         /// </summary>
-        public int ID { get; private set; }
+        public int ID { get; set; }
         /// <summary>
         /// The name of this event.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; set; }
         /// <summary>
         /// A description of this event.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; set; }
         /// <summary>
         /// The raw variables contained in this event.  This property is public
         /// solely for the purposes of deserialization - use GetValue() instead.
         /// </summary>
-        public List<Variable> Variables { get; private set; }
+        public List<Variable> Variables { get; set; }
         /// <summary>
         /// The indexed variables contained in this event.
         /// </summary>

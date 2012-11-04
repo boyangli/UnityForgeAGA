@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TwitterData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Characters>
+    <Character>
+      <ID>1</ID>
+      <Name>Mister Fantastic</Name>
+    </Character>
+    <Character>
+      <ID>2</ID>
+      <Name>Invisible Woman</Name>
+      <Likes>
+        <int>1</int>
+      </Likes>
+    </Character>
+    <Character>
+      <ID>3</ID>
+      <Name>The Human Torch</Name>
+      <Likes>
+        <int>2</int>
+      </Likes>
+    </Character>
+    <Character>
+      <ID>4</ID>
+      <Name>The Thing</Name>
+      <Likes>
+        <int>3</int>
+      </Likes>
+    </Character>
+    <Character>
+      <ID>5</ID>
+      <Name>Annihilus</Name>
+    </Character>
+    <Character>
+      <ID>6</ID>
+      <Name>Doctor Doom</Name>
+    </Character>
+    <Character>
+      <ID>7</ID>
+      <Name>Mad Thinker</Name>
+    </Character>
+    <Character>
+      <ID>8</ID>
+      <Name>Terminus</Name>
+    </Character>
+  </Characters>
+  <Relationships>
+    <Relationship>
+      <person1>1</person1>
+      <person2>2</person2>
+    </Relationship>
+    <Relationship>
+      <person1>1</person1>
+      <person2>3</person2>
+    </Relationship>
+    <Relationship>
+      <person1>1</person1>
+      <person2>4</person2>
+    </Relationship>
+    <Relationship>
+      <person1>7</person1>
+      <person2>5</person2>
+    </Relationship>
+    <Relationship>
+      <person1>7</person1>
+      <person2>6</person2>
+    </Relationship>
+    <Relationship>
+      <person1>7</person1>
+      <person2>8</person2>
+    </Relationship>
+  </Relationships>
+  <PropObjects>
+    <PropObject>
+      <ID>1</ID>
+      <Name>Chocolate</Name>
+    </PropObject>
+    <PropObject>
+      <ID>2</ID>
+      <Name>Gun</Name>
+    </PropObject>
+    <PropObject>
+      <ID>3</ID>
+      <Name>Porsche</Name>
+    </PropObject>
+  </PropObjects>
+  <Villain>7</Villain>
+  <Sidekick>1</Sidekick>
+</TwitterData>

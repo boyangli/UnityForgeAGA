@@ -1,6 +1,7 @@
 using UnityEngine;
-using System.IO;
 
+using System.IO;
+using System;
 using StoryEngine;
 using WorldEngine;
 using WorldEngine.Items;
@@ -53,6 +54,13 @@ public class WorldGUI : MonoBehaviour
 	/// True, if an attempt was made to load an invalid external episode file.
 	/// </summary>
 	private bool validEpisode = true;
+	
+	public Vector2 TwitterBounds = new Vector2 (256, 512);
+	public bool  DisplayTwitter { get; private set; }
+	private Vector2 twScroll = Vector2.zero;	
+	private int selectedTwitter = -1;
+	private bool validTwitter = true;
+	private bool displayTwitterBuffer = false;
 
 	/// <summary>
 	/// X, Y offset from upper left for drawing the dialog window.
@@ -161,6 +169,7 @@ public class WorldGUI : MonoBehaviour
 			//Because the mouse origin is lower left, while screen is upper left... >_>
 			mouse.y = Screen.height - mouse.y;
 			return (this.episodeBounds.Contains (mouse) && this.displayEpisodesBuffer) ||
+					(this.twitterBounds.Contains (mouse) && this.displayTwitterBuffer) ||
                    (this.dialogueBounds.Contains (mouse) && this.displayDialogueBuffer) ||
                    (this.inventoryBounds.Contains (mouse) && this.displayInventoryBuffer) ||
                    (this.storyBounds.Contains (mouse) && this.displayStoryBuffer) ||
@@ -186,6 +195,7 @@ public class WorldGUI : MonoBehaviour
 	/// The bounding rectangle for the episode window.
 	/// </summary>
 	private Rect episodeBounds;
+	private Rect twitterBounds;
 	/// <summary>
 	/// The bounding rectangle for the dialog window.
 	/// </summary>
@@ -238,7 +248,8 @@ public class WorldGUI : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		this.DisplayEpisodes = true;
+		this.DisplayEpisodes = false;
+		this.DisplayTwitter = true;
 		this.DisplayDialogue = false;
 		this.DisplayInventory = false;
 		this.DisplayStory = false;
@@ -258,6 +269,7 @@ public class WorldGUI : MonoBehaviour
 	{
 		//Buffer the booleans to prevent issues with mouse clicking as windows disappear.
 		this.displayEpisodesBuffer = this.DisplayEpisodes;
+		this.displayTwitterBuffer = this.DisplayTwitter;
 		this.displayDialogueBuffer = this.DisplayDialogue;
 		this.displayInventoryBuffer = this.DisplayInventory;
 		this.displayStoryBuffer = this.DisplayStory;
@@ -266,7 +278,8 @@ public class WorldGUI : MonoBehaviour
 		this.displayActorInventory = this. DisplayActorInventory;
 		this.displayActeeInventory = this. DisplayActeeInventory;
 		//Check to see if the DM is finished running.
-		this.DisplayEpisodes = Globals.Instance.DMScript.DramaManager.EpisodeFinished;
+		//this.DisplayEpisodes = Globals.Instance.DMScript.DramaManager.EpisodeFinished;
+		this.DisplayTwitter = Globals.Instance.DMScript.DramaManager.EpisodeFinished;
 
 		//Check for inventory keypress.
 		if (Input.GetKeyDown (KeyCode.I)) {
@@ -295,6 +308,12 @@ public class WorldGUI : MonoBehaviour
 		this.episodeBounds = new Rect (
             (Screen.width - this.EpisodeBounds.x) / 2,
             (Screen.height - this.EpisodeBounds.y) / 2,
+            this.EpisodeBounds.x,
+            this.EpisodeBounds.y
+            );
+		this.twitterBounds = new Rect (
+            (Screen.width - this.TwitterBounds.x) / 2,
+            (Screen.height - this.TwitterBounds.y) / 2,
             this.EpisodeBounds.x,
             this.EpisodeBounds.y
             );
@@ -345,6 +364,8 @@ public class WorldGUI : MonoBehaviour
 		//Don't draw the window if we're not supposed to be displaying.
 		if (this.DisplayEpisodes)
 			GUI.Window (0, this.episodeBounds, this.DrawEpisodes, "", this.defaultSkin.window);
+		if (this.displayTwitterBuffer)
+			GUI.Window (9, this.twitterBounds, this.DrawTwitter, "", this.defaultSkin.window);
 		if (this.displayDialogueBuffer)
 			GUI.Window (1, this.dialogueBounds, this.DrawDialogue, "");
 		if (this.displayInventoryBuffer)
@@ -416,6 +437,7 @@ public class WorldGUI : MonoBehaviour
 				this.DisplayEpisodes = false;
 		}
 	}
+	
 
 	private string[] GetEpisodeNames ()
 	{
@@ -429,7 +451,7 @@ public class WorldGUI : MonoBehaviour
 			names = Directory.GetFiles ("Episodes", "*.xml");
 		} else {
 			//Get all the episodes in Resources/Episodes within the Project Assets.
-			Object[] episodes = Resources.LoadAll ("Episodes", typeof(TextAsset));
+			UnityEngine.Object[] episodes = Resources.LoadAll ("Episodes", typeof(TextAsset));
 			names = new string[episodes.Length];
 			for (int i = 0; i < episodes.Length; i++)
 				names [i] = episodes [i].name;
@@ -445,9 +467,75 @@ public class WorldGUI : MonoBehaviour
 			string[] fileNames = Directory.GetFiles ("Episodes", "*.xml");
 			data = File.ReadAllText (fileNames [this.selectedEpisode]);
 		} else {
-			Object[] episodes = Resources.LoadAll ("Episodes", typeof(TextAsset));
+			UnityEngine.Object[] episodes = Resources.LoadAll ("Episodes", typeof(TextAsset));
 			data = ((TextAsset)episodes [this.selectedEpisode]).text;
 		}
+		return data;
+	}
+
+    #endregion
+	
+	#region Twitter data input display...
+	/// <summary>
+	/// Displays the episode selection window.
+	/// </summary>
+	/// <param name="windowID">The Unity window ID.</param>
+	private void DrawTwitter (int windowID)
+	{
+		//Fetch all the episodes in the system.
+		string[] twitterNames = this.GetTwitterFilenames ();
+
+		GUI.skin = this.defaultSkin;
+		GUILayout.BeginVertical ();
+
+		GUILayout.Label ("Choose Twitter data to load...");
+
+		if (!this.validTwitter) {
+			GUILayout.Label ("The selected file was invalid, please select a valid Episode XML file.");
+		}
+
+		this.twScroll = GUILayout.BeginScrollView (this.twScroll, false, false);
+		this.selectedTwitter = GUILayout.SelectionGrid (this.selectedTwitter, twitterNames, 1);
+		GUILayout.EndScrollView ();
+
+		GUILayout.Space (16);
+		bool load = GUILayout.Button ("Load Selected");
+
+		GUILayout.EndVertical ();
+		GUI.skin = this.Skin;
+		Console.Out.WriteLine("vvv \n" + load);
+		//Load in the episode if the load button was pushed and we have a selection.
+		if (load && this.selectedTwitter != -1) {
+			string data = File.ReadAllText (twitterNames [this.selectedTwitter]);
+			StoryEngine.Trace.TwitterData td = StoryEngine.Trace.TwitterData.Deserialize(data);
+			td.loadIntoEngine();
+			this.validTwitter = true;
+			//If it's good, let's move on.
+			if (this.validTwitter)
+			{
+				this.DisplayTwitter = false;
+				this.displayTwitterBuffer=false;
+			}
+		}
+	}
+	
+
+	private string[] GetTwitterFilenames ()
+	{
+		string[] names = null;
+
+		bool exists = Directory.Exists ("TwitterData");
+		if (!exists)
+			Directory.CreateDirectory ("TwitterData");
+		names = Directory.GetFiles ("TwitterData", "*.xml");
+		return names;
+	}
+
+	private string GetTwitterData ()
+	{
+		string data = null;
+		string[] fileNames = Directory.GetFiles ("TwitterData", "*.xml");
+		data = File.ReadAllText (fileNames [this.selectedEpisode]);
 		return data;
 	}
 

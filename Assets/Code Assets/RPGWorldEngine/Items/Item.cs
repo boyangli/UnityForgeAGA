@@ -9,11 +9,22 @@ namespace WorldEngine.Items {
         /// <summary>
         /// The name of this item.
         /// </summary>
-        public string Name { get; private set; }
+        /// 
+        /// 
+        public string Name { 
+			get {return this.name;}
+			set { 
+				this.name = value;
+//				if (this.Owner != null)
+//					this.Owner.name = this.name; 
+			}
+		}
+		
+		private string name;
         /// <summary>
         /// A description of the item.
         /// </summary>
-        public string Description { get; private set; }
+        public string Description { get; set; }
         /// <summary>
         /// The art asset used to represent this item.
         /// </summary>

@@ -16,5 +16,10 @@
         /// Private constructor for the purposes of serialization.
         /// </summary>
         private Variable() { }
+		
+		public Variable(string name, string val) {
+			Name = name;
+			Value = val;
+		}
     }
 }

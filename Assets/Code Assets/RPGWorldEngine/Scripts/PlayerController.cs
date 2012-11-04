@@ -314,6 +314,22 @@ public class PlayerController : MonoBehaviour
 		string[] actions = new string[11]{"talk", "pickup", "trade", "deliver", "collect", "enter-combat", "steal", "loot", "kill-by-item", "revive-by-item", "cancel"};
 		string selectedAction = actions [Globals.Instance.WorldGUI.selectedAction];
 		
+		/* check if active tasks are valid */
+		foreach(TaskNode tn in this.activeTasks)
+		{    
+			bool valid = false;
+			foreach(string s in actions)
+			{
+				if (tn.data.Type == s)
+				{
+					valid = true;
+					break;
+				}
+			}
+			if (!valid)
+				Debug.LogError("Invalid task: " + tn.data.ID + " " + tn.data.Type);
+		}
+		
 		Item selectedActorItem = null;
 		Item selectedActeeItem = null;
 		
@@ -331,7 +347,8 @@ public class PlayerController : MonoBehaviour
 		{
 			if(selectedAction == tn.data.Type && NonContextActor == tn.data.Actor)
 			{
-				if((tn.data.Type == "pickup" && selectedActorItem.Name == NonContextItem.Name) || NonContextActee == tn.data.Actee)
+				if((tn.data.Type == "pickup" && selectedActorItem.Name == NonContextItem.Name) || 
+					(NonContextActee == tn.data.Actee && tn.data.Type != "talk"))
 				{
 					selectedAction = "cancel";
 					break;
@@ -404,15 +421,25 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 			default:
-				Debug.Log ("Attempting to contextually act on an unknown task.");
+				Debug.Log ("Attempting to contextually act on an unknown task : " + selectedAction);
 				break;
 			}
 			
 			//If we've done the right thing here.
 			foreach(TaskNode tn in this.activeTasks)
 			{
+				
+				if (tn.data.ID == 11)
+					{
+						Debug.Log("Task com");
+					}
+				
 				if (this.NonContextActee == tn.data.Actee && tn.data.Type == selectedAction && !correctItemNotSelected)
-					TaskDone(tn);
+				{
+
+					TaskDone(tn);	
+					Debug.Log("Task completed: " + tn.data.ID + tn.data.Description);
+				}				
 			}			
 
 		}

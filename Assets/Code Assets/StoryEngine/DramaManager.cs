@@ -93,12 +93,24 @@ namespace StoryEngine
 			return true;
 		}
 		
+		public bool LoadTasks (List<StoryEvent> events, List<Link> links)
+		{					
+			buildTaskGraph (events, links);
+			this.history = new List<TaskNode> ();           			
+			//Set the DM to start executing.
+			this.EpisodeFinished = false;
+			//Get the first task in there, so prevent an off-by-one null exception.
+			this.AdvanceScript ();
+			return true;
+		}
+		
 		private void buildTaskGraph (List<StoryEvent> events, List<Link> links)
 		{
 			Dictionary<int, TaskNode> dictionary = new Dictionary<int, TaskNode> ();
 			foreach (StoryEvent e in events) {
 				int id = e.ID;
 				Task t = new Task (e);
+				Debug.Log("built taks " + id);
 				TaskNode node = new TaskNode (t);
 				dictionary.Add (id, node);
 			}
@@ -223,7 +235,7 @@ namespace StoryEngine
 				if (player == null)
 					return;
 				
-				// allow this to happen
+				// repair any false preconditions for the active task
 				this.EmergencyRepair (node.data);
 				//this.CurrentTask = next;
 				//this.CurrentTask.Actor.ActiveTask = next;

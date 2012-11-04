@@ -1,0 +1,203 @@
+<Episode>
+  <ID>111</ID>
+  <Events>
+	<StoryEvent>
+      <ID>0</ID>
+      <Name>talk</Name>
+      <Description>Talk to the sidekick.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>
+	
+	<StoryEvent>
+      <ID>1</ID>
+      <Name>kill-by-item</Name>
+      <Description>Kill {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>	
+    <StoryEvent>
+      <ID>2</ID>
+      <Name>loot</Name>
+      <Description>Loot {item} from {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>
+	<StoryEvent>
+      <ID>3</ID>
+      <Name>deliver</Name>
+      <Description>deliver {item} to {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent> 
+
+	
+	<StoryEvent>
+      <ID>4</ID>
+      <Name>kill-by-item</Name>
+      <Description>Kill {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>	
+    <StoryEvent>
+      <ID>5</ID>
+      <Name>loot</Name>
+      <Description>Loot {item} from {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>
+	<StoryEvent>
+      <ID>6</ID>
+      <Name>deliver</Name>
+      <Description>deliver {item} to {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent> 
+
+	
+	<StoryEvent>
+      <ID>7</ID>
+      <Name>kill-by-item</Name>
+      <Description>Kill {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>	
+    <StoryEvent>
+      <ID>8</ID>
+      <Name>loot</Name>
+      <Description>Loot {item} from {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>
+	<StoryEvent>
+      <ID>9</ID>
+      <Name>deliver</Name>
+      <Description>deliver {item} to {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent> 	
+	
+    <StoryEvent>
+      <ID>10</ID>
+      <Name>talk</Name>
+      <Description>Talk to {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>        
+      </Variables>
+    </StoryEvent>
+	
+	<StoryEvent>
+      <ID>11</ID>
+      <Name>kill-by-item</Name>
+      <Description>kill {character2}.</Description>
+      <Variables>
+        <Variable>
+          <Name>character1</Name>
+          <Value>player</Value>
+        </Variable>       
+      </Variables>
+    </StoryEvent>
+  </Events>
+  <Links>
+	
+	<Link> 
+		<Source>0</Source>
+		<Target>1</Target>		
+	</Link>
+	<Link> 
+		<Source>1</Source>
+		<Target>2</Target>		
+	</Link>
+	<Link> 
+		<Source>2</Source>
+		<Target>3</Target>		
+	</Link>
+	
+	<Link> 
+		<Source>0</Source>
+		<Target>4</Target>		
+	</Link>
+	<Link> 
+		<Source>4</Source>
+		<Target>5</Target>		
+	</Link>
+	<Link> 
+		<Source>5</Source>
+		<Target>6</Target>		
+	</Link>
+	
+	<Link> 
+		<Source>0</Source>
+		<Target>7</Target>		
+	</Link>
+	<Link> 
+		<Source>7</Source>
+		<Target>8</Target>		
+	</Link>
+	<Link> 
+		<Source>8</Source>
+		<Target>9</Target>		
+	</Link>	
+	
+	<Link> 
+		<Source>9</Source>
+		<Target>10</Target>		
+	</Link>
+	<Link> 
+		<Source>3</Source>
+		<Target>10</Target>		
+	</Link>
+	<Link> 
+		<Source>6</Source>
+		<Target>10</Target>		
+	</Link>
+	<Link> 
+		<Source>10</Source>
+		<Target>11</Target>		
+	</Link>
+	
+  </Links>
+</Episode>
